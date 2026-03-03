@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  badge?: string;
+  class?: string;
+}
+
+const { title, description, href, badge, class: className = '' } = Astro.props;
+---
+
+<a href={href} class={`group block border border-steel-200 bg-white transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${className}`} data-animate="fade-up">
+  <div class="img-zoom">
+    <slot name="image" />
+  </div>
+  <div class="p-6">
+    {badge && (
+      <span class="mb-2 inline-block rounded bg-accent/10 px-2 py-1 text-xs font-semibold text-accent">
+        {badge}
+      </span>
+    )}
+    <h3 class="font-heading text-lg font-bold text-steel-900 group-hover:text-accent transition-colors">
+      {title}
+    </h3>
+    <p class="mt-2 text-sm leading-relaxed text-steel-600">{description}</p>
+    <span class="mt-4 inline-flex items-center text-sm font-medium text-accent">
+      Dowiedz się więcej
+      <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+  </div>
+</a>

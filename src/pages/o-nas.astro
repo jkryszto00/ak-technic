@@ -1,0 +1,315 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import FeatureGrid from '@components/ui/FeatureGrid.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import { company } from '@data/company';
+import { organizationSchema, breadcrumbSchema } from '@utils/jsonLd';
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'O nas' },
+];
+
+const jsonLd = [
+  organizationSchema(),
+  breadcrumbSchema(breadcrumbs),
+];
+---
+
+<PageLayout
+  title="O nas - AK Technic"
+  description="AK Technic - oficjalny dystrybutor grafitu SGL Carbon na Polskę. Od 2012 roku dostarczamy rozwiązania dla przemysłu narzędziowego. Poznaj naszą historię."
+  breadcrumbs={breadcrumbs}
+  heroTitle="O firmie AK Technic"
+  heroSubtitle="Oficjalny dystrybutor grafitu SGL Carbon na Polskę od 2012 roku"
+  jsonLd={jsonLd}
+>
+  <!-- Company story -->
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
+    <div class="prose max-w-none" data-animate="fade-right">
+      <h2>Nasza historia</h2>
+      <p>
+        AK Technic to firma założona w 2012 roku w Bydgoszczy, specjalizująca się w dostarczaniu
+        materiałów i usług dla przemysłu narzędziowego. Od samego początku naszym celem było
+        zapewnienie polskim firmom dostępu do najwyższej jakości grafitu EDM bezpośrednio
+        od światowego producenta.
+      </p>
+      <p>
+        Uzyskanie statusu oficjalnego dystrybutora SGL Carbon na Polskę było przełomowym
+        momentem w naszej działalności. Dzięki bezpośredniej współpracy z producentem
+        możemy oferować naszym klientom konkurencyjne ceny, pełną dostępność materiałów
+        oraz profesjonalne wsparcie techniczne.
+      </p>
+      <p>
+        Na przestrzeni lat rozszerzyliśmy naszą ofertę o usługi obróbki CNC grafitu i metalu,
+        oprawki EROWA oraz materiały eksploatacyjne do maszyn EDM. Dziś jesteśmy kompleksowym
+        partnerem dla firm z branży narzędziowej na terenie całej Polski.
+      </p>
+    </div>
+
+    <div class="flex aspect-video items-center justify-center bg-steel-100 text-steel-400 lg:aspect-auto" data-animate="fade-left" data-delay="150">
+      <svg class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Historia rozwoju firmy" centered={false} />
+    <div class="mt-8 relative">
+      <!-- Timeline line -->
+      <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-steel-200 hidden md:block md:left-1/2 md:-translate-x-px"></div>
+
+      <div class="space-y-8 md:space-y-12" data-stagger="120">
+        <!-- 2012 -->
+        <div class="relative md:grid md:grid-cols-2 md:gap-8" data-animate="fade-up">
+          <div class="md:text-right md:pr-12">
+            <div class="inline-block rounded bg-accent px-3 py-1 text-sm font-bold text-white">2012</div>
+            <h4 class="mt-3 font-heading text-lg font-bold text-steel-900">Założenie firmy</h4>
+            <p class="mt-2 text-steel-600">
+              Powstanie AK Technic w Bydgoszczy. Początek działalności jako dostawca materiałów
+              dla przemysłu narzędziowego, ze szczególnym naciskiem na grafit do obróbki elektroerozyjnej.
+            </p>
+          </div>
+          <div class="hidden md:block"></div>
+        </div>
+
+        <!-- 2014 -->
+        <div class="relative md:grid md:grid-cols-2 md:gap-8" data-animate="fade-up">
+          <div class="hidden md:block"></div>
+          <div class="md:pl-12">
+            <div class="inline-block rounded bg-accent px-3 py-1 text-sm font-bold text-white">2014</div>
+            <h4 class="mt-3 font-heading text-lg font-bold text-steel-900">Partnerstwo z SGL Carbon</h4>
+            <p class="mt-2 text-steel-600">
+              Uzyskanie statusu oficjalnego dystrybutora grafitu SGL Carbon na Polskę. Bezpośredni
+              dostęp do pełnej gamy grafitów izotropowych od światowego lidera w produkcji grafitu EDM.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2017 -->
+        <div class="relative md:grid md:grid-cols-2 md:gap-8" data-animate="fade-up">
+          <div class="md:text-right md:pr-12">
+            <div class="inline-block rounded bg-accent px-3 py-1 text-sm font-bold text-white">2017</div>
+            <h4 class="mt-3 font-heading text-lg font-bold text-steel-900">Uruchomienie usług CNC</h4>
+            <p class="mt-2 text-steel-600">
+              Rozszerzenie oferty o usługi obróbki CNC grafitu i metalu. Inwestycja w nowoczesny
+              park maszynowy do frezowania i toczenia. Początek produkcji elektrod EDM na zamówienie.
+            </p>
+          </div>
+          <div class="hidden md:block"></div>
+        </div>
+
+        <!-- 2020 -->
+        <div class="relative md:grid md:grid-cols-2 md:gap-8" data-animate="fade-up">
+          <div class="hidden md:block"></div>
+          <div class="md:pl-12">
+            <div class="inline-block rounded bg-accent px-3 py-1 text-sm font-bold text-white">2020</div>
+            <h4 class="mt-3 font-heading text-lg font-bold text-steel-900">Dystrybucja EROWA</h4>
+            <p class="mt-2 text-steel-600">
+              Wprowadzenie do oferty oprawek i systemów mocowania EROWA. Kompleksowe rozwiązania
+              toolingowe dla narzędziowni - od materiału, przez uchwyty, po gotowe elektrody.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="relative md:grid md:grid-cols-2 md:gap-8" data-animate="fade-up">
+          <div class="md:text-right md:pr-12">
+            <div class="inline-block rounded bg-accent px-3 py-1 text-sm font-bold text-white">2023</div>
+            <h4 class="mt-3 font-heading text-lg font-bold text-steel-900">Rozbudowa i rozwój</h4>
+            <p class="mt-2 text-steel-600">
+              Rozbudowa parku maszynowego, poszerzenie oferty materiałów eksploatacyjnych i wzmocnienie
+              zespołu technicznego. Obsługa ponad 100 stałych klientów na terenie całej Polski.
+            </p>
+          </div>
+          <div class="hidden md:block"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AK Technic w liczbach -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="AK Technic w liczbach" centered={true} />
+    <div class="mt-8 grid grid-cols-2 gap-6 lg:grid-cols-4" data-stagger="100">
+      <div class="border border-steel-200 p-6 text-center" data-animate="fade-up">
+        <div class="text-4xl font-bold text-accent">14+</div>
+        <div class="mt-2 text-sm font-medium text-steel-600">lat doświadczenia</div>
+        <p class="mt-1 text-xs text-steel-400">w branży narzędziowej</p>
+      </div>
+      <div class="border border-steel-200 p-6 text-center" data-animate="fade-up">
+        <div class="text-4xl font-bold text-accent">500+</div>
+        <div class="mt-2 text-sm font-medium text-steel-600">elektrod rocznie</div>
+        <p class="mt-1 text-xs text-steel-400">produkowanych na CNC</p>
+      </div>
+      <div class="border border-steel-200 p-6 text-center" data-animate="fade-up">
+        <div class="text-4xl font-bold text-accent">4</div>
+        <div class="mt-2 text-sm font-medium text-steel-600">gatunki grafitu</div>
+        <p class="mt-1 text-xs text-steel-400">SGL Carbon w stałej ofercie</p>
+      </div>
+      <div class="border border-steel-200 p-6 text-center" data-animate="fade-up">
+        <div class="text-4xl font-bold text-accent">100+</div>
+        <div class="mt-2 text-sm font-medium text-steel-600">stałych klientów</div>
+        <p class="mt-1 text-xs text-steel-400">na terenie całej Polski</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnership -->
+  <div class="mt-16 border border-accent/20 bg-accent/5 p-8" data-animate="scale-in">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        <h2 class="font-heading text-2xl font-bold text-steel-900">
+          Oficjalny dystrybutor SGL Carbon
+        </h2>
+        <p class="mt-4 text-steel-700">
+          SGL Carbon to wiodący światowy producent grafitu izotropowego do obróbki elektroerozyjnej.
+          Jako oficjalny dystrybutor na Polskę, zapewniamy dostęp do pełnej gamy produktów SGL Carbon,
+          konkurencyjne ceny i profesjonalne doradztwo techniczne w doborze odpowiedniego gatunku grafitu.
+        </p>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="flex h-40 w-40 items-center justify-center rounded-full bg-white p-6 shadow-md">
+          <img src="/images/logo/sgl-carbon-logo.svg" alt="SGL Carbon - oficjalny partner" class="h-auto w-full" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branże, które obsługujemy -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Branże, które obsługujemy" centered={false} subtitle="Dostarczamy rozwiązania dla wiodących sektorów przemysłu" />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger="80">
+      <div class="flex gap-4 border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-steel-900">Narzędziownie</h4>
+          <p class="mt-1 text-sm text-steel-600">Formy wtryskowe, matryce, stemple, wykrojniki. Elektrody EDM i materiały eksploatacyjne.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-steel-900">Przemysł motoryzacyjny</h4>
+          <p class="mt-1 text-sm text-steel-600">Formy na elementy samochodowe, oprzyrządowanie produkcyjne, prototypy.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-steel-900">Przemysł elektroniczny</h4>
+          <p class="mt-1 text-sm text-steel-600">Formy na obudowy elektroniczne, złącza, elementy precyzyjne o drobnych detalach.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-steel-900">Przemysł medyczny</h4>
+          <p class="mt-1 text-sm text-steel-600">Formy na wyroby medyczne, elementy precyzyjne o najwyższych wymaganiach jakościowych.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-steel-900">Przemysł opakowaniowy</h4>
+          <p class="mt-1 text-sm text-steel-600">Formy na opakowania, nakrętki, zamknięcia. Elektrody do form na butelki i pojemniki.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-heading font-semibold text-steel-900">Przemysł maszynowy</h4>
+          <p class="mt-1 text-sm text-steel-600">Elementy maszyn, części zamienne, detale precyzyjne z grafitu i metalu na zamówienie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="mt-16">
+    <SectionHeading title="Nasze wartości" centered={false} />
+    <div class="mt-8">
+      <FeatureGrid features={[
+        { title: 'Jakość', description: 'Dostarczamy wyłącznie sprawdzone, certyfikowane materiały od renomowanych producentów.' },
+        { title: 'Rzetelność', description: 'Dotrzymujemy terminów i zobowiązań. Budujemy relacje oparte na zaufaniu.' },
+        { title: 'Wiedza', description: 'Wieloletnie doświadczenie w branży przekładamy na fachowe doradztwo techniczne.' },
+        { title: 'Partnerstwo', description: 'Traktujemy każdego klienta indywidualnie, szukając najlepszych rozwiązań.' },
+        { title: 'Rozwój', description: 'Nieustannie poszerzamy ofertę i doskonalimy nasze usługi.' },
+        { title: 'Dostępność', description: 'Szybka realizacja zamówień i doradztwo dostępne od poniedziałku do piątku.' },
+      ]} columns={3} />
+    </div>
+  </div>
+
+  <!-- Location -->
+  <div class="mt-16">
+    <SectionHeading title="Gdzie nas znajdziesz" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div data-animate="fade-right">
+        <p class="text-steel-700">
+          Nasza siedziba mieści się w Bydgoszczy, centralnym punkcie na mapie Polski.
+          Dzięki dogodnej lokalizacji realizujemy szybkie dostawy na terenie całego kraju.
+        </p>
+        <dl class="mt-6 space-y-4">
+          <div>
+            <dt class="text-sm font-medium text-steel-500">Adres</dt>
+            <dd class="mt-1 text-steel-900">{company.address.street}, {company.address.postalCode} {company.address.city}</dd>
+          </div>
+          <div>
+            <dt class="text-sm font-medium text-steel-500">Telefon</dt>
+            <dd class="mt-1"><a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline">{company.phone}</a></dd>
+          </div>
+          <div>
+            <dt class="text-sm font-medium text-steel-500">Email</dt>
+            <dd class="mt-1"><a href={`mailto:${company.email}`} class="text-accent hover:underline">{company.email}</a></dd>
+          </div>
+          <div>
+            <dt class="text-sm font-medium text-steel-500">Godziny pracy</dt>
+            <dd class="mt-1 text-steel-900">{company.hours}</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="w-full overflow-hidden" data-animate="fade-left" data-delay="150">
+        <iframe
+          class="aspect-video w-full border-0"
+          src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Fordo%C5%84ska%20169,%20Bydgoszcz&amp;t=p&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokalizacja AK Technic - Bydgoszcz"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA />
+  </div>
+</PageLayout>

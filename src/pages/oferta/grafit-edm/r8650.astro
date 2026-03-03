@@ -1,0 +1,9 @@
+---
+export const prerender = true;
+import GraphiteProductPage from '@components/sections/GraphiteProductPage.astro';
+import { graphiteProducts } from '@data/products';
+
+const product = graphiteProducts.find(p => p.slug === 'r8650')!;
+---
+
+<GraphiteProductPage product={product} />

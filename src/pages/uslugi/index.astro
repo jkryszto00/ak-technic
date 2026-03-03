@@ -1,0 +1,165 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Card from '@components/ui/Card.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import FeatureGrid from '@components/ui/FeatureGrid.astro';
+import { services } from '@data/services';
+import { company } from '@data/company';
+import { breadcrumbSchema } from '@utils/jsonLd';
+
+const serviceImages: Record<string, { src: string; alt: string }> = {
+  'frezowanie-grafitu-cnc': { src: '/images/services/frezowanie_grafitu.jpg', alt: 'Frezowanie grafitu CNC' },
+  'toczenie-grafitu': { src: '/images/services/toczenie_grafitu.jpg', alt: 'Toczenie grafitu CNC' },
+};
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Usługi' },
+];
+---
+
+<PageLayout
+  title="Usługi obróbki CNC - frezowanie, toczenie, elektrody EDM"
+  description="Profesjonalne usługi obróbki CNC grafitu i metalu. Frezowanie, toczenie, produkcja elektrod EDM. Nowoczesny park maszynowy w Bydgoszczy."
+  breadcrumbs={breadcrumbs}
+  heroTitle="Profesjonalne usługi obróbki CNC"
+  heroSubtitle="Frezowanie grafitu i metalu, toczenie, produkcja elektrod EDM. Od projektu po gotowy detal."
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="prose max-w-none" data-animate="fade-up">
+    <p>
+      AK Technic oferuje profesjonalne usługi obróbki CNC grafitu i metalu. Nasz nowoczesny park
+      maszynowy oraz wieloletnie doświadczenie w branży pozwalają realizować nawet najbardziej
+      wymagające zlecenia. Specjalizujemy się w produkcji elektrod EDM z grafitu SGL Carbon,
+      frezowaniu precyzyjnych elementów grafitowych i metalowych oraz toczeniu CNC.
+    </p>
+    <p>
+      Jako oficjalny dystrybutor grafitu SGL Carbon, oferujemy kompleksową usługę "od materiału po
+      gotowy detal". Klient nie musi szukać oddzielnego dostawcy materiału i osobnej firmy do obróbki
+      - realizujemy cały proces pod jednym dachem, co skraca czas realizacji, upraszcza logistykę
+      i pozwala na optymalny dobór gatunku grafitu do konkretnego zastosowania.
+    </p>
+    <p>
+      Współpracujemy zarówno z dużymi narzędziowniami i zakładami produkcyjnymi, jak i z mniejszymi
+      firmami potrzebującymi pojedynczych prototypów. Niezależnie od wielkości zamówienia, gwarantujemy
+      najwyższą jakość obróbki, terminowość i profesjonalne doradztwo techniczne. Zadzwoń pod numer
+      <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-medium">{company.phone}</a>
+      lub <a href="/kontakt/" class="text-accent hover:underline font-medium">wypełnij formularz kontaktowy</a>,
+      a przygotujemy wycenę w ciągu 24 godzin.
+    </p>
+  </div>
+
+  <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2" data-stagger="120">
+    {services.map(service => {
+      const image = serviceImages[service.slug];
+      return (
+        <Card
+          title={service.name}
+          description={service.shortDescription}
+          href={`/uslugi/${service.slug}/`}
+        >
+          {image ? (
+            <img slot="image" src={image.src} alt={image.alt} class="aspect-[3/2] w-full object-cover" />
+          ) : (
+            <div slot="image" class="flex aspect-[3/2] items-center justify-center bg-steel-100 text-steel-400">
+              <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+          )}
+        </Card>
+      );
+    })}
+  </div>
+
+  <!-- Proces współpracy -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Proces współpracy" subtitle="Od zapytania do gotowego detalu - 6 prostych kroków" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger="100">
+      <div class="relative border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent text-white">
+          <span class="text-xl font-bold">1</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Zapytanie ofertowe</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Wyślij nam dokumentację techniczną (rysunki 2D/3D, modele CAD) wraz z informacją o materiale,
+          ilości sztuk i wymaganych tolerancjach. Możesz to zrobić mailowo, telefonicznie lub przez
+          formularz kontaktowy.
+        </p>
+      </div>
+      <div class="relative border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent text-white">
+          <span class="text-xl font-bold">2</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Analiza i wycena</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Nasz zespół analizuje dokumentację, dobiera optymalny gatunek materiału i technologię obróbki.
+          W ciągu 24 godzin otrzymasz wycenę z terminem realizacji. Doradzamy również optymalizacje
+          konstrukcyjne, jeśli mogą obniżyć koszty.
+        </p>
+      </div>
+      <div class="relative border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent text-white">
+          <span class="text-xl font-bold">3</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Potwierdzenie zlecenia</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Po akceptacji wyceny potwierdzamy termin realizacji i rozpoczynamy przygotowanie produkcji.
+          Zamawiamy materiał (jeśli nie jest na stanie) i przygotowujemy programy CNC.
+        </p>
+      </div>
+      <div class="relative border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent text-white">
+          <span class="text-xl font-bold">4</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Obróbka CNC</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Realizujemy obróbkę na nowoczesnych maszynach CNC z zachowaniem najwyższych standardów jakości.
+          Stosujemy odpowiednie narzędzia i parametry obróbki dobrane do materiału i wymagań detalu.
+        </p>
+      </div>
+      <div class="relative border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent text-white">
+          <span class="text-xl font-bold">5</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Kontrola jakości</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Każdy detal przechodzi kontrolę wymiarową. Sprawdzamy zgodność z dokumentacją, tolerancje,
+          jakość powierzchni i inne wymagane parametry. Na życzenie dostarczamy protokół pomiarowy.
+        </p>
+      </div>
+      <div class="relative border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent text-white">
+          <span class="text-xl font-bold">6</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Dostawa</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Gotowe detale pakujemy i wysyłamy kurierem na terenie całej Polski. Oferujemy również
+          odbiór osobisty w naszej siedzibie w Bydgoszczy. Przy regularnych zamówieniach
+          ustalamy indywidualny harmonogram dostaw.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <SectionHeading title="Dlaczego AK Technic?" centered={false} />
+    <div class="mt-8">
+      <FeatureGrid features={[
+        { title: 'Doświadczenie', description: 'Wieloletnia praktyka w obróbce grafitu i produkcji elektrod EDM' },
+        { title: 'Precyzja', description: 'Tolerancje do ±0.01mm dzięki nowoczesnemu parkowi maszynowemu' },
+        { title: 'Materiały', description: 'Oficjalny dystrybutor grafitu SGL Carbon - optymalny dobór materiału' },
+        { title: 'Kompleksowość', description: 'Od doboru materiału, przez obróbkę, po kontrolę jakości' },
+        { title: 'Szybkość', description: 'Krótkie terminy realizacji i elastyczność w pilnych zleceniach' },
+        { title: 'Wsparcie', description: 'Doradztwo techniczne i pomoc w optymalizacji procesu' },
+      ]} columns={3} />
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA title="Potrzebujesz usług obróbki CNC?" />
+  </div>
+</PageLayout>

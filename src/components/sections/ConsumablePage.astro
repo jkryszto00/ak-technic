@@ -1,0 +1,86 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import Button from '@components/ui/Button.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import { productSchema, breadcrumbSchema } from '@utils/jsonLd';
+import { consumableCategories } from '@data/products';
+
+interface Props {
+  category: typeof consumableCategories[number];
+  content: string;
+}
+
+const { category, content } = Astro.props;
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Oferta' },
+  { label: 'Materiały eksploatacyjne', href: '/oferta/materialy-eksploatacyjne/' },
+  { label: category.name },
+];
+
+const otherCategories = consumableCategories.filter(c => c.id !== category.id);
+
+const jsonLd = [
+  productSchema({
+    name: category.name,
+    description: category.shortDescription,
+    url: `https://ak-technic.pl/oferta/materialy-eksploatacyjne/${category.slug}/`,
+  }),
+  breadcrumbSchema(breadcrumbs),
+];
+---
+
+<PageLayout
+  title={category.seoTitle}
+  description={category.seoDescription}
+  breadcrumbs={breadcrumbs}
+  heroTitle={category.name}
+  heroSubtitle={category.shortDescription}
+  jsonLd={jsonLd}
+>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+    <div class="lg:col-span-2">
+      <div class="prose max-w-none">
+        <slot />
+      </div>
+
+      <div class="mt-8">
+        <Button href="/kontakt/" variant="primary" size="lg">
+          Zapytaj o dostępność i cenę
+        </Button>
+      </div>
+    </div>
+
+    <aside>
+      <div class="sticky top-24 space-y-6">
+        <div class="border border-steel-200 p-6">
+          <h3 class="font-heading text-lg font-bold text-steel-900">Inne materiały</h3>
+          <ul class="mt-4 space-y-2">
+            {otherCategories.map(c => (
+              <li>
+                <a href={`/oferta/materialy-eksploatacyjne/${c.slug}/`} class="text-sm text-steel-600 hover:text-accent transition-colors">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="border border-accent/20 bg-accent/5 p-6">
+          <h3 class="font-heading font-bold text-steel-900">Potrzebujesz pomocy?</h3>
+          <p class="mt-2 text-sm text-steel-600">
+            Nasi eksperci pomogą dobrać odpowiednie materiały do Twoich maszyn.
+          </p>
+          <Button href="/kontakt/" variant="dark" size="sm" class="mt-4">
+            Skontaktuj się
+          </Button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA />
+  </div>
+</PageLayout>

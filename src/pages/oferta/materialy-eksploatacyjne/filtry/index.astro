@@ -1,0 +1,272 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Button from '@components/ui/Button.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { consumableCategories } from '@data/products';
+import { company } from '@data/company';
+import { breadcrumbSchema } from '@utils/jsonLd';
+
+const category = consumableCategories.find(c => c.id === 'filtry')!;
+const otherCategories = consumableCategories.filter(c => c.id !== 'filtry');
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Materiały eksploatacyjne', href: '/oferta/materialy-eksploatacyjne/' },
+  { label: category.name },
+];
+---
+
+<PageLayout
+  title={category.seoTitle}
+  description={category.seoDescription}
+  breadcrumbs={breadcrumbs}
+  heroTitle={category.name}
+  heroSubtitle={category.shortDescription}
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+    <div class="lg:col-span-2 prose max-w-none">
+      <p>
+        Dostarczamy filtry do maszyn elektroerozyjnych wiodących producentów. Regularna wymiana
+        filtrów zapewnia optymalną jakość dielektryka, wydłuża żywotność maszyny i gwarantuje
+        stabilność procesu obróbki. W naszej ofercie znajdują się filtry zamienne kompatybilne
+        z oryginalnymi częściami, spełniające te same normy jakości przy atrakcyjniejszej cenie.
+      </p>
+      <p>
+        Właściwa filtracja to fundament stabilnej i precyzyjnej obróbki elektroerozyjnej. Zanieczyszczony
+        dielektryk prowadzi do niestabilnego iskrzenia, pogorszenia jakości powierzchni, przyspieszenia
+        zużycia elementów maszyny i wzrostu kosztów eksploatacyjnych. Dlatego regularna wymiana filtrów
+        to jedna z najważniejszych czynności konserwacyjnych w każdej narzędziowni.
+      </p>
+
+      <h2>Rodzaje filtrów w ofercie</h2>
+
+      <h3>Filtry dielektryka</h3>
+      <p>
+        Filtry papierowe i syntetyczne do oczyszczania cieczy dielektrycznej w maszynach drążących
+        i wycinających. Filtr dielektryka usuwa produkty erozji (cząsteczki metalu, grafit, węgiel)
+        z cieczy roboczej, utrzymując jej czystość na poziomie zapewniającym stabilne iskrzenie
+        i wysoką jakość powierzchni obrabianej.
+      </p>
+      <p>
+        Oferujemy filtry dielektryka w pełnej gamie rozmiarów i klas filtracji, dostosowane do
+        konkretnych modeli maszyn. Filtry papierowe o klasie filtracji od 1 do 25 um zapewniają
+        skuteczne usuwanie zanieczyszczeń. Filtry syntetyczne charakteryzują się dłuższą żywotnością
+        i mogą być stosowane w systemach z automatyczną regeneracją.
+      </p>
+
+      <h3>Filtry powietrza</h3>
+      <p>
+        Filtry HEPA i filtry pyłowe do systemów odpylania przy obróbce grafitu na maszynach CNC.
+        Obróbka grafitu generuje drobny pył, który bez odpowiedniej filtracji może uszkodzić
+        prowadnice maszyn, zanieczyszczać środowisko pracy i stanowić zagrożenie zdrowotne
+        dla operatorów.
+      </p>
+      <p>
+        Nasze filtry powietrza klasy HEPA H13/H14 wychwytują ponad 99.97% cząsteczek o wielkości
+        0.3 um i większych. Dostępne są również pre-filtry o niższej klasie filtracji, służące
+        jako pierwsza bariera ochronna wydłużająca żywotność filtrów głównych.
+      </p>
+
+      <h3>Filtry workowe</h3>
+      <p>
+        Filtry workowe do systemów filtracji przemysłowej, stosowane w centralnych systemach
+        odpylania i filtracji dielektryka. Dostępne w różnych rozmiarach, materiałach
+        (poliester, polipropylen, PTFE) i klasach filtracji. Filtry workowe sprawdzają się
+        szczególnie w dużych instalacjach przemysłowych obsługujących wiele maszyn jednocześnie.
+      </p>
+    </div>
+
+    <aside>
+      <div class="sticky top-24 space-y-6">
+        <div class="border border-steel-200 p-6">
+          <h3 class="font-heading text-lg font-bold text-steel-900">Inne materiały</h3>
+          <ul class="mt-4 space-y-2">
+            {otherCategories.map(c => (
+              <li>
+                <a href={`/oferta/materialy-eksploatacyjne/${c.slug}/`} class="text-sm text-steel-600 hover:text-accent transition-colors">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="border border-accent/20 bg-accent/5 p-6">
+          <h3 class="font-heading font-bold text-steel-900">Nie znalazłeś filtra?</h3>
+          <p class="mt-2 text-sm text-steel-600">Podaj model maszyny, a dobierzemy właściwy filtr.</p>
+          <p class="mt-3 text-sm font-medium text-accent">
+            <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="hover:underline">{company.phone}</a>
+          </p>
+          <Button href="/kontakt/" variant="dark" size="sm" class="mt-4">Skontaktuj się</Button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Compatibility Table -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Kompatybilność filtrów z markami maszyn" centered={false} />
+    <p class="mt-4 text-steel-600">
+      Oferujemy filtry zamienne kompatybilne z maszynami wszystkich wiodących producentów.
+      Poniższa tabela przedstawia dostępność filtrów w podziale na typ i markę maszyny.
+    </p>
+    <div class="mt-8 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-steel-900 text-white">
+            <th class="px-4 py-3 text-left font-medium">Producent maszyny</th>
+            <th class="px-4 py-3 text-center font-medium">Filtry dielektryka</th>
+            <th class="px-4 py-3 text-center font-medium">Filtry powietrza</th>
+            <th class="px-4 py-3 text-center font-medium">Filtry workowe</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-steel-200">
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Sodick</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Mitsubishi</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Fanuc</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-steel-400">-</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">AgieCharmilles (GF)</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Makino</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-steel-400">-</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">ONA</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-steel-400">-</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Accutex</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">&#10003;</td>
+            <td class="px-4 py-3 text-center text-steel-400">-</td>
+            <td class="px-4 py-3 text-center text-steel-400">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-steel-500">
+      Nie widzisz swojego producenta? Skontaktuj się z nami - dostarczamy filtry do praktycznie
+      każdego modelu maszyny EDM dostępnego na rynku.
+    </p>
+  </div>
+
+  <!-- Maintenance Tips -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Wskazówki dotyczące konserwacji filtrów" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2" data-stagger="100">
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Regularny harmonogram wymiany</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Wymieniaj filtry dielektryka co 200-500 godzin pracy maszyny, w zależności od intensywności
+          obróbki. Filtry powietrza wymagają wymiany co 500-1000 godzin lub częściej przy intensywnej
+          obróbce grafitu.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Monitoruj ciśnienie dielektryka</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Spadek ciśnienia w układzie filtracji to pierwszy sygnał, że filtr wymaga wymiany.
+          Monitoruj wskaźniki ciśnienia na maszynie i nie przekraczaj dopuszczalnego spadku
+          ciśnienia zalecany przez producenta.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Zapas filtrów w magazynie</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Utrzymuj zapas filtrów na minimum 2-3 wymiany. Nieplanowany przestój maszyny z powodu
+          braku filtra jest znacznie kosztowniejszy niż utrzymanie zapasu magazynowego.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Jakość dielektryka</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Oprócz wymiany filtrów, regularnie kontroluj konduktywność i czystość dielektryka.
+          Zanieczyszczony dielektryk przyspiesza zużycie filtrów i negatywnie wpływa na
+          jakość obróbki.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Najczęściej zadawane pytania" centered={false} />
+    <div class="mt-8 space-y-6">
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jak często wymieniać filtr dielektryka w maszynie EDM?</h3>
+        <p class="mt-3 text-steel-700">
+          Częstotliwość wymiany zależy od intensywności pracy maszyny i rodzaju obróbki. Przy
+          standardowej obróbce zalecamy wymianę co 300-500 godzin pracy. Przy intensywnej obróbce
+          grafitu (drążenie) - co 150-300 godzin. Objawy zużytego filtra to spadek ciśnienia
+          dielektryka, pogorszenie jakości powierzchni i niestabilne iskrzenie. Nowoczesne maszyny
+          mają wskaźniki informujące o konieczności wymiany.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Czy filtry zamienne są równie skuteczne jak oryginalne?</h3>
+        <p class="mt-3 text-steel-700">
+          Oferowane przez nas filtry zamienne spełniają te same specyfikacje co filtry oryginalne -
+          identyczna klasa filtracji, wymiary i wydajność. Są produkowane z materiałów o porównywalnej
+          jakości, co gwarantuje pełną kompatybilność z maszyną i brak wpływu na gwarancję producenta.
+          Różnica polega głównie na cenie - filtry zamienne są nawet o 30-50% tańsze od oryginalnych.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jak dobrać filtr do mojej maszyny EDM?</h3>
+        <p class="mt-3 text-steel-700">
+          Najprostszy sposób to podanie nam marki i modelu maszyny - dobierzemy właściwy filtr na
+          podstawie naszej bazy kompatybilności. Możesz również podać numer katalogowy oryginalnego
+          filtra lub jego wymiary (średnica, wysokość, średnica otworów). Wystarczy zadzwonić pod numer
+          <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-medium">{company.phone}</a>
+          lub napisać na <a href={`mailto:${company.email}`} class="text-accent hover:underline font-medium">{company.email}</a>
+          z informacją o maszynie.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16"><ContactCTA title="Potrzebujesz filtrów do maszyny EDM?" subtitle="Podaj model maszyny, a dobierzemy właściwy filtr. Szybka wycena i dostawa na terenie całej Polski." /></div>
+</PageLayout>

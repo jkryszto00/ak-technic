@@ -1,0 +1,51 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Card from '@components/ui/Card.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import { consumableCategories } from '@data/products';
+import { breadcrumbSchema } from '@utils/jsonLd';
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Oferta' },
+  { label: 'Materiały eksploatacyjne' },
+];
+---
+
+<PageLayout
+  title="Materiały eksploatacyjne do maszyn EDM"
+  description="Materiały eksploatacyjne do obróbki elektroerozyjnej - drut EDM, filtry, elektrody, frezy. Kompatybilne z popularnymi markami maszyn. Dostawa w całej Polsce."
+  breadcrumbs={breadcrumbs}
+  heroTitle="Materiały eksploatacyjne"
+  heroSubtitle="Kompleksowe zaopatrzenie w materiały eksploatacyjne do maszyn EDM i CNC"
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="prose max-w-none">
+    <p>
+      Oferujemy szeroki asortyment materiałów eksploatacyjnych do maszyn elektroerozyjnych i obróbczych.
+      Nasze produkty są kompatybilne z popularnymi markami maszyn EDM: Sodick, Mitsubishi, Fanuc, Charmilles,
+      AgieCharmilles i inne.
+    </p>
+  </div>
+
+  <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
+    {consumableCategories.map(cat => (
+      <Card
+        title={cat.name}
+        description={cat.shortDescription}
+        href={`/oferta/materialy-eksploatacyjne/${cat.slug}/`}
+      >
+        <div slot="image" class="flex aspect-[3/2] items-center justify-center bg-steel-100 text-steel-400">
+          <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+      </Card>
+    ))}
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA title="Potrzebujesz materiałów eksploatacyjnych?" />
+  </div>
+</PageLayout>

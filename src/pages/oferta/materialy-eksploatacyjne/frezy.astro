@@ -1,0 +1,296 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Button from '@components/ui/Button.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { consumableCategories } from '@data/products';
+import { company } from '@data/company';
+import { breadcrumbSchema } from '@utils/jsonLd';
+
+const category = consumableCategories.find(c => c.id === 'frezy')!;
+const otherCategories = consumableCategories.filter(c => c.id !== 'frezy');
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Materiały eksploatacyjne', href: '/oferta/materialy-eksploatacyjne/' },
+  { label: category.name },
+];
+---
+
+<PageLayout
+  title={category.seoTitle}
+  description={category.seoDescription}
+  breadcrumbs={breadcrumbs}
+  heroTitle={category.name}
+  heroSubtitle={category.shortDescription}
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+    <div class="lg:col-span-2 prose max-w-none">
+      <p>
+        Oferujemy frezy specjalnie dobrane do obróbki grafitu, miedzi oraz metali narzędziowych.
+        Prawidłowy dobór narzędzia skrawającego jest kluczowy dla jakości obróbki, żywotności
+        frezów i efektywności kosztowej procesu produkcyjnego. Wieloletnie doświadczenie w obróbce
+        grafitu pozwala nam rekomendować optymalne narzędzia do każdego zastosowania.
+      </p>
+      <p>
+        Grafit jest materiałem o specyficznych właściwościach skrawania - jest kruchy, generuje
+        drobny pył abrazyjny i wymaga narzędzi o odpowiedniej geometrii i powłoce. Standardowe
+        frezy do metalu szybko się zużywają przy obróbce grafitu. Dlatego oferujemy narzędzia
+        dedykowane, zaprojektowane z myślą o maksymalnej trwałości i jakości obróbki grafitu.
+      </p>
+
+      <h2>Frezy do grafitu</h2>
+
+      <h3>Frezy diamentowe (PCD - Polycrystalline Diamond)</h3>
+      <p>
+        Najwyższa trwałość i jakość powierzchni spośród dostępnych narzędzi do obróbki grafitu.
+        Frezy z polikrystaliczną wkładką diamentową lub powłoką CVD-diamond są optymalnym
+        wyborem do produkcji seryjnej elektrod grafitowych. Żywotność frezów PCD jest
+        10-50 razy dłuższa niż frezów węglikowych, co znacząco obniża koszty narzędziowe
+        przy dużych wolumenach produkcji.
+      </p>
+      <p><strong>Zastosowania:</strong> Produkcja seryjna elektrod grafitowych, obróbka
+        wykończeniowa wymagająca najwyższej jakości powierzchni, obróbka grafitów o drobnym
+        ziarnie (R8710, R8650), elementy wymagające minimalnego zużycia narzędzia.</p>
+      <p><strong>Zalety:</strong> Ekstremalnie długa żywotność, doskonała jakość powierzchni,
+        stabilne parametry obróbki przez cały okres użytkowania, niski koszt na detal przy
+        dużych seriach.</p>
+      <p><strong>Dostępne typy:</strong> Frezy walcowo-czołowe od 1 mm do 20 mm, frezy
+        kuliste od 0.5 mm do 12 mm, frezy stożkowe, frezy do gwintowania.</p>
+
+      <h3>Frezy węglikowe (VHM) do grafitu</h3>
+      <p>
+        Frezy z węglików spiekanych (VHM - Vollhartmetall) z dedykowaną geometrią i powłoką
+        do obróbki grafitu. Stanowią dobry kompromis między ceną a trwałością. Powłoka
+        diamentopodobna (DLC) lub nanokompozyty wielowarstwowe (np. AlTiN) zwiększają
+        odporność na ścieranie pyłem grafitowym.
+      </p>
+      <p><strong>Zastosowania:</strong> Uniwersalna obróbka grafitu, produkcja prototypowa
+        i małoseryjna, obróbka zgrubna i wykończeniowa, obróbka grafitów o grubszym ziarnie
+        (R8340, R8500).</p>
+      <p><strong>Zalety:</strong> Atrakcyjna cena, szeroka gama średnic i geometrii, dobra
+        jakość powierzchni, dostępność od ręki.</p>
+      <p><strong>Dostępne typy:</strong> Frezy walcowo-czołowe od 0.5 mm do 25 mm, frezy
+        kuliste od 0.3 mm do 16 mm, frezy toroidalne, frezy do rowków.</p>
+
+      <h2>Frezy do metalu</h2>
+
+      <h3>Frezy węglikowe (VHM) do metalu</h3>
+      <p>
+        Frezy z węglików spiekanych z powłokami TiAlN, AlCrN lub nACo do obróbki stali
+        narzędziowych, stali hartowanych, aluminium i miedzi. Różne geometrie ostrzy,
+        ilości zębów i kąty spirali do specyficznych zastosowań. Frezy VHM do metalu
+        nadają się do obróbki elektrod miedzianych, uchwytów mocujących i elementów
+        stalowych na maszynach CNC.
+      </p>
+
+      <h3>Frezy HSS (stal szybkotnąca)</h3>
+      <p>
+        Frezy ze stali szybkotnącej w wersjach z powłoką TiN i bez. Ekonomiczne rozwiązanie
+        do obróbki materiałów miękkich: aluminium, mosiądzu, tworzyw sztucznych i stali
+        niskowęglowych. Frezy HSS są mniej odporne na ścieranie niż węglikowe, ale
+        oferują lepszą udarność i niższą cenę.
+      </p>
+      <p><strong>Zastosowania:</strong> Obróbka aluminium i metali kolorowych, prototypy,
+        obróbka ogólna na starszych maszynach o mniejszej sztywności.</p>
+    </div>
+
+    <aside>
+      <div class="sticky top-24 space-y-6">
+        <div class="border border-steel-200 p-6">
+          <h3 class="font-heading text-lg font-bold text-steel-900">Inne materiały</h3>
+          <ul class="mt-4 space-y-2">
+            {otherCategories.map(c => (
+              <li>
+                <a href={`/oferta/materialy-eksploatacyjne/${c.slug}/`} class="text-sm text-steel-600 hover:text-accent transition-colors">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="border border-accent/20 bg-accent/5 p-6">
+          <h3 class="font-heading font-bold text-steel-900">Dobór frezów</h3>
+          <p class="mt-2 text-sm text-steel-600">Pomożemy dobrać frez do Twojego zastosowania.</p>
+          <p class="mt-3 text-sm font-medium text-accent">
+            <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="hover:underline">{company.phone}</a>
+          </p>
+          <Button href="/kontakt/" variant="dark" size="sm" class="mt-4">Skontaktuj się</Button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Machining Parameters -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Zalecane parametry skrawania grafitu" centered={false} />
+    <p class="mt-4 text-steel-600">
+      Poniższe parametry to orientacyjne wartości startowe. Optymalne ustawienia zależą od
+      konkretnego gatunku grafitu, maszyny, mocowania i wymaganej jakości powierzchni.
+    </p>
+    <div class="mt-8 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-steel-900 text-white">
+            <th class="px-4 py-3 text-left font-medium">Parametr</th>
+            <th class="px-4 py-3 text-left font-medium">Frezy PCD</th>
+            <th class="px-4 py-3 text-left font-medium">Frezy VHM (grafit)</th>
+            <th class="px-4 py-3 text-left font-medium">Frezy VHM (metal)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-steel-200">
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Prędkość skrawania (Vc)</td>
+            <td class="px-4 py-3 text-steel-700">200 - 800 m/min</td>
+            <td class="px-4 py-3 text-steel-700">150 - 500 m/min</td>
+            <td class="px-4 py-3 text-steel-700">80 - 250 m/min</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Posuw na ząb (fz)</td>
+            <td class="px-4 py-3 text-steel-700">0.02 - 0.10 mm</td>
+            <td class="px-4 py-3 text-steel-700">0.02 - 0.08 mm</td>
+            <td class="px-4 py-3 text-steel-700">0.03 - 0.15 mm</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Głębokość skrawania (ap)</td>
+            <td class="px-4 py-3 text-steel-700">0.1 - 2.0 mm</td>
+            <td class="px-4 py-3 text-steel-700">0.1 - 1.5 mm</td>
+            <td class="px-4 py-3 text-steel-700">0.5 - 3.0 mm</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Szerokość skrawania (ae)</td>
+            <td class="px-4 py-3 text-steel-700">do 50% sredni. frezu</td>
+            <td class="px-4 py-3 text-steel-700">do 40% sredni. frezu</td>
+            <td class="px-4 py-3 text-steel-700">do 60% sredni. frezu</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Chłodzenie</td>
+            <td class="px-4 py-3 text-steel-700">Sprężone powietrze / odsysanie</td>
+            <td class="px-4 py-3 text-steel-700">Sprężone powietrze / odsysanie</td>
+            <td class="px-4 py-3 text-steel-700">Emulsja / MQL</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Strategia obróbki</td>
+            <td class="px-4 py-3 text-steel-700">HSC, małe ap, duży Vc</td>
+            <td class="px-4 py-3 text-steel-700">HSC, małe ap, duży Vc</td>
+            <td class="px-4 py-3 text-steel-700">Zgrubna + wykończeniowa</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-steel-500">
+      Uwaga: Przy obróbce grafitu zawsze stosuj odsysanie pyłu. Nigdy nie używaj chłodzenia
+      cieczą - grafit wchłania wilgoć, co pogarsza parametry obróbki EDM.
+    </p>
+  </div>
+
+  <!-- Selection Guide -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Przewodnik doboru frezów" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger="100">
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <span class="text-xl font-bold text-accent">1</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Określ materiał</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Grafit wymaga frezów z powłoką diamentową (PCD) lub dedykowaną (DLC/AlTiN). Miedź
+          i stal wymagają frezów VHM z odpowiednią powłoką (TiAlN, nACo).
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <span class="text-xl font-bold text-accent">2</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Wybierz typ obróbki</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Obróbka zgrubna wymaga frezów o większej średnicy i mocniejszej geometrii. Wykończeniowa
+          - mniejsze średnice i frezy kuliste lub toroidalne dla gładkiej powierzchni.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <span class="text-xl font-bold text-accent">3</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Oceń wolumen</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Przy produkcji seryjnej inwestycja w frezy PCD zwraca się wielokrotnie. Przy prototypach
+          i małych seriach frezy VHM oferują lepszy stosunek kosztu do wydajności.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <span class="text-xl font-bold text-accent">4</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Sprawdź maszynę</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Frezy PCD i VHM do grafitu wymagają maszyn HSC o wysokich obrotach wrzeciona (min. 20 000 obr/min).
+          Na maszynach konwencjonalnych lepiej sprawdzą się frezy VHM standardowe.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <span class="text-xl font-bold text-accent">5</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Dobierz średnicę</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Średnicę frezu dobierz do najmniejszego promienia na detalu. Stosuj zasadę: średnica
+          frezu wykończeniowego = 2x minimalny promień wewnętrzny detalu.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <span class="text-xl font-bold text-accent">6</span>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Skonsultuj się z nami</h4>
+        <p class="mt-2 text-sm text-steel-600">
+          Nie jesteś pewien? Zadzwoń pod
+          <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-medium">{company.phone}</a>.
+          Pomożemy dobrać optymalny frez i parametry obróbki.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Najczęściej zadawane pytania" centered={false} />
+    <div class="mt-8 space-y-6">
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Czy frezy do metalu nadają się do obróbki grafitu?</h3>
+        <p class="mt-3 text-steel-700">
+          Standardowe frezy do metalu można używać do obróbki grafitu, ale ich żywotność będzie
+          bardzo krótka - pył grafitowy jest silnie abrazyjny i szybko ściera ostrza niechronione
+          odpowiednią powłoką. Frezy do metalu bez powłoki diamentowej lub DLC zużywają się przy
+          graficie nawet 10-20 razy szybciej niż frezy dedykowane. Dlatego zdecydowanie zalecamy
+          stosowanie frezów z powłoką diamentową (PCD) lub dedykowaną (DLC/AlTiN) do obróbki grafitu.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jaka jest żywotność frezów PCD w porównaniu do VHM?</h3>
+        <p class="mt-3 text-steel-700">
+          Frezy PCD (diamentowe) wytrzymują 10-50 razy dłużej niż frezy VHM przy obróbce grafitu.
+          Dokładna różnica zależy od gatunku grafitu, parametrów obróbki i średnicy frezu.
+          Przy produkcji seryjnej elektrod z grafitu R8650, typowy frez VHM o średnicy 6 mm
+          wytrzymuje ok. 10-20 godzin obróbki, podczas gdy frez PCD tej samej średnicy -
+          200-500 godzin. Mimo wielokrotnie wyższej ceny zakupu, koszt narzędzia na detal
+          jest przy PCD zdecydowanie niższy.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jakie chłodzenie stosować przy frezowaniu grafitu?</h3>
+        <p class="mt-3 text-steel-700">
+          Przy frezowaniu grafitu nie wolno stosować chłodzenia cieczą (emulsją). Grafit jest
+          materiałem porowatym i wchłania wilgoć, co negatywnie wpływa na jego właściwości
+          jako elektrody EDM. Zamiast tego stosuje się odsysanie pyłu grafitowego bezpośrednio
+          ze strefy obróbki, wspomagane sprężonym powietrzem. Dobrze zaprojektowany system
+          odpylania jest niezbędny zarówno ze względu na ochronę maszyny (pył grafitowy jest
+          abrazyjny i może uszkodzić prowadnice), jak i zdrowie operatorów.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16"><ContactCTA title="Potrzebujesz frezów do grafitu lub metalu?" subtitle="Doradzimy w doborze frezów, powłok i parametrów obróbki. Zadzwoń lub napisz do nas." /></div>
+</PageLayout>

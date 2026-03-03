@@ -1,0 +1,165 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Card from '@components/ui/Card.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import FeatureGrid from '@components/ui/FeatureGrid.astro';
+import { graphiteProducts, consumableCategories } from '@data/products';
+import { breadcrumbSchema } from '@utils/jsonLd';
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Oferta' },
+];
+
+const categories = [
+  {
+    title: 'Grafit EDM',
+    description: 'Wysokiej jakości grafit izotropowy SGL Carbon do obróbki elektroerozyjnej. Gatunki R8710, R8650, R8500, R8510 — od ultraprecyzyjnych po ekonomiczne.',
+    href: '/oferta/grafit-edm/',
+    badge: 'SGL Carbon',
+    icon: 'cube',
+  },
+  {
+    title: 'Oprawki EROWA',
+    description: 'System mocowania elektrod EROWA zapewniający powtarzalność pozycjonowania i szybką wymianę detali. Idealne do automatyzacji procesów EDM.',
+    href: '/oferta/erowa/',
+    badge: 'EROWA',
+    icon: 'cog',
+  },
+  {
+    title: 'Materiały eksploatacyjne',
+    description: 'Drut EDM, filtry, elektrody i frezy do maszyn elektroerozyjnych. Kompatybilne z popularnymi markami — Sodick, Mitsubishi, Fanuc.',
+    href: '/oferta/materialy-eksploatacyjne/',
+    badge: null,
+    icon: 'tools',
+  },
+];
+---
+
+<PageLayout
+  title="Oferta - Grafit EDM, Oprawki EROWA, Materiały eksploatacyjne"
+  description="Kompleksowa oferta produktów do obróbki elektroerozyjnej EDM. Grafit SGL Carbon, oprawki EROWA, drut, filtry, elektrody i frezy. Oficjalny dystrybutor w Polsce."
+  breadcrumbs={breadcrumbs}
+  heroTitle="Nasza oferta"
+  heroSubtitle="Kompleksowe zaopatrzenie dla branży EDM — od grafitu SGL Carbon po materiały eksploatacyjne."
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="prose max-w-none" data-animate="fade-up">
+    <p>
+      AK Technic to oficjalny dystrybutor grafitu SGL Carbon na Polskę. Oferujemy pełen zakres produktów
+      do obróbki elektroerozyjnej — od wysokiej jakości grafitów EDM, przez systemy mocowania EROWA,
+      po materiały eksploatacyjne do maszyn EDM. Dzięki wieloletniemu doświadczeniu w branży pomagamy
+      dobrać optymalne rozwiązania dla każdego procesu produkcyjnego.
+    </p>
+    <p>
+      W naszej ofercie znajdziesz 4 gatunki grafitu izotropowego SGL Carbon (R8710, R8650, R8500, R8510)
+      o różnej wielkości ziarna — od ultraprecyzyjnego 5 &mu;m do ekonomicznego 25 &mu;m. Uzupełniamy je
+      o kompletne systemy mocowania EROWA zapewniające powtarzalność pozycjonowania poniżej 2 &mu;m,
+      a także drut EDM, filtry, elektrody miedziane i frezy kompatybilne z maszynami Sodick, Mitsubishi,
+      Fanuc i innych wiodących producentów.
+    </p>
+    <p>
+      Oprócz dostaw materiałów realizujemy usługi obróbki CNC grafitu i metalu — frezowanie elektrod EDM,
+      toczenie, szlifowanie oraz cięcie grafitu na wymiar. Współpracujemy zarówno z małymi narzędziowniami,
+      jak i dużymi zakładami produkcyjnymi, oferując elastyczne warunki współpracy i konkurencyjne ceny.
+    </p>
+  </div>
+
+  <!-- Główne kategorie -->
+  <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3" data-stagger="120">
+    {categories.map(cat => (
+      <Card
+        title={cat.title}
+        description={cat.description}
+        href={cat.href}
+        badge={cat.badge}
+      >
+        <div slot="image" class="flex aspect-[3/2] items-center justify-center bg-steel-100 text-steel-400">
+          {cat.icon === 'cube' && (
+            <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          )}
+          {cat.icon === 'cog' && (
+            <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          )}
+          {cat.icon === 'tools' && (
+            <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+          )}
+        </div>
+      </Card>
+    ))}
+  </div>
+
+  <!-- Gatunki grafitu -->
+  <div class="mt-16">
+    <SectionHeading title="Gatunki grafitu SGL Carbon" subtitle="Dobierz optymalny gatunek grafitu do Twojego zastosowania." centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger="80">
+      {graphiteProducts.map(product => (
+        <a
+          href={`/oferta/grafit-edm/${product.slug}/`}
+          class="group block border border-steel-200 p-5 transition-all duration-300 hover:border-accent hover:shadow-lg"
+          data-animate="fade-up"
+        >
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-steel-900 group-hover:text-accent transition-colors">{product.name}</h3>
+            <span class="text-xs font-medium text-steel-400">{product.specs[0].value} {product.specs[0].unit}</span>
+          </div>
+          <p class="mt-2 text-sm text-steel-600 line-clamp-2">{product.shortDescription}</p>
+          <div class="mt-3 flex items-center gap-1 text-sm font-medium text-accent">
+            Szczegóły
+            <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Dlaczego AK Technic -->
+  <div class="mt-16">
+    <SectionHeading title="Dlaczego AK Technic?" centered={false} />
+    <div class="mt-8">
+      <FeatureGrid features={[
+        { title: 'Oficjalny dystrybutor', description: 'Autoryzowany dystrybutor grafitu SGL Carbon na rynek polski z pełnym wsparciem producenta' },
+        { title: 'Doradztwo techniczne', description: 'Pomoc w doborze optymalnego gatunku grafitu i parametrów obróbki do Twojego zastosowania' },
+        { title: 'Szybka dostawa', description: 'Magazyn w Polsce — krótkie terminy realizacji i dostawa na terenie całego kraju' },
+        { title: 'Kompleksowa oferta', description: 'Wszystko do EDM w jednym miejscu — grafit, oprawki, drut, filtry, elektrody i frezy' },
+        { title: 'Usługi obróbki', description: 'Frezowanie i toczenie grafitu CNC oraz produkcja elektrod EDM na zamówienie' },
+        { title: 'Wieloletnie doświadczenie', description: 'Znajomość branży EDM i sprawdzone rozwiązania dla przemysłu narzędziowego' },
+      ]} columns={3} />
+    </div>
+  </div>
+
+  <!-- Dla jakich branż -->
+  <div class="mt-16">
+    <SectionHeading title="Dla jakich branż?" subtitle="Nasze produkty i usługi znajdują zastosowanie w wielu sektorach przemysłu." centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger="100">
+      {[
+        { title: 'Motoryzacja', description: 'Elektrody grafitowe do form wtryskowych na elementy karoserii, obudowy lamp, komponenty silnikowe i wnętrza pojazdów.' },
+        { title: 'Medycyna', description: 'Precyzyjne formy do produkcji implantów, narzędzi chirurgicznych i obudów urządzeń medycznych wymagających najwyższej dokładności.' },
+        { title: 'Elektronika', description: 'Mikroelektrody do produkcji złączy, obudów komponentów elektronicznych i elementów precyzyjnych o drobnych detalach.' },
+        { title: 'Opakowaniowa', description: 'Formy i matryce do produkcji opakowań z tworzyw sztucznych, zamknięć, nakrętek i pojemników metodą EDM.' },
+        { title: 'Lotnicza', description: 'Elektrody do obróbki superstopów i tytanu stosowanych w przemyśle lotniczym, gdzie wymagana jest wyjątkowa precyzja.' },
+        { title: 'Narzędziowa', description: 'Kompleksowe zaopatrzenie narzędziowni — grafit, oprawki, materiały eksploatacyjne i usługi obróbki elektrod EDM.' },
+      ].map(item => (
+        <div class="border border-steel-200 bg-white p-6 transition-all hover:shadow-md hover:border-accent/50" data-animate="fade-up">
+          <h3 class="font-heading text-lg font-bold text-steel-900">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-steel-600">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA title="Potrzebujesz pomocy w doborze produktów?" subtitle="Skontaktuj się z nami — doradzimy optymalne rozwiązanie dla Twojej produkcji." />
+  </div>
+</PageLayout>

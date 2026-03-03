@@ -1,0 +1,204 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Button from '@components/ui/Button.astro';
+import FeatureGrid from '@components/ui/FeatureGrid.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { breadcrumbSchema } from '@utils/jsonLd';
+import { company } from '@data/company';
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Oferta' },
+  { label: 'Oprawki EROWA' },
+];
+---
+
+<PageLayout
+  title="Oprawki EROWA - systemy mocowania do EDM"
+  description="Systemy mocowania EROWA do obróbki elektroerozyjnej. Uchwyty, palety i systemy referencyjne zapewniające najwyższą powtarzalność. Oficjalny dostawca w Polsce."
+  breadcrumbs={breadcrumbs}
+  heroTitle="Oprawki EROWA"
+  heroSubtitle="Systemy mocowania i pozycjonowania dla obróbki EDM i CNC"
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-5">
+    <div class="lg:col-span-3" data-animate="fade-right">
+      <div class="prose max-w-none">
+        <p>
+          EROWA to światowy lider w dziedzinie systemów mocowania i automatyzacji procesów obróbki.
+          Ich systemy referencyjne zapewniają najwyższą powtarzalność pozycjonowania, co jest kluczowe
+          w precyzyjnej obróbce elektroerozyjnej i frezowaniu CNC.
+        </p>
+        <p>
+          Jako dostawca produktów EROWA oferujemy kompleksową gamę uchwytów, palet i systemów
+          referencyjnych kompatybilnych z najpopularniejszymi maszynami EDM i centrami obróbczymi.
+          Pomagamy w doborze odpowiedniego systemu do potrzeb Twojej produkcji.
+        </p>
+        <p>
+          System mocowania EROWA eliminuje konieczność czasochłonnego ustawiania detali po każdym
+          przeniesieniu między maszynami. Elektroda lub detal zamocowany w oprawce EROWA może być
+          wielokrotnie zdejmowany i zakładany z powtarzalnością poniżej 2 &mu;m, co przekłada się
+          na wyższą produktywność i niższe koszty przestojów maszyn.
+        </p>
+
+        <h2>Co oferujemy</h2>
+        <ul>
+          <li>Uchwyty EROWA do maszyn EDM (drążarek i wycinarek)</li>
+          <li>Systemy palet do automatyzacji produkcji</li>
+          <li>Elektrody z uchwytami EROWA (gotowe do montażu)</li>
+          <li>Doradztwo w doborze systemu mocowania</li>
+          <li>Akcesoria i części zamienne</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lg:col-span-2" data-animate="fade-left" data-delay="150">
+      <img src="/images/products/erowa.png" alt="Oprawki EROWA - systemy mocowania do EDM" class="aspect-square w-full object-cover" />
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <h3 class="mb-6 font-heading text-xl font-bold text-steel-900">Dlaczego EROWA?</h3>
+    <FeatureGrid features={[
+      { title: 'Powtarzalność &lt;2μm', description: 'Najwyższa precyzja pozycjonowania na rynku' },
+      { title: 'Kompatybilność', description: 'Współpracuje z większością maszyn EDM i CNC' },
+      { title: 'Automatyzacja', description: 'Gotowe rozwiązania do automatyzacji produkcji' },
+      { title: 'Trwałość', description: 'Szwajcarska jakość wykonania i materiałów' },
+      { title: 'Szybka wymiana', description: 'Błyskawiczna zmiana detalu bez ustawiania' },
+      { title: 'Wsparcie techniczne', description: 'Doradztwo w doborze i konfiguracji systemu' },
+    ]} columns={3} />
+  </div>
+
+  <!-- Systemy mocowania EROWA w naszej ofercie -->
+  <div class="mt-16">
+    <SectionHeading title="Systemy mocowania EROWA w naszej ofercie" centered={false} />
+    <p class="mt-4 text-steel-600 leading-relaxed max-w-3xl">
+      Oferujemy najpopularniejsze systemy mocowania EROWA, sprawdzone w tysiącach narzędziowni na całym świecie. Każdy system dobieramy indywidualnie do wymagań klienta i posiadanego parku maszynowego.
+    </p>
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2" data-stagger="100">
+      <div class="border border-steel-200 bg-white p-6 transition-all hover:shadow-lg hover:border-accent" data-animate="fade-up">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+          </div>
+          <h4 class="font-heading text-lg font-bold text-steel-900">EROWA ITS 50</h4>
+        </div>
+        <p class="text-sm text-steel-600 leading-relaxed">
+          Kompaktowy system mocowania o średnicy 50 mm, idealny do małych i średnich elektrod grafitowych. Powtarzalność pozycjonowania &lt;2 &mu;m. Najpopularniejszy wybór dla drążarek EDM w narzędziowniach. Doskonały stosunek ceny do możliwości.
+        </p>
+      </div>
+      <div class="border border-steel-200 bg-white p-6 transition-all hover:shadow-lg hover:border-accent" data-animate="fade-up">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+          </div>
+          <h4 class="font-heading text-lg font-bold text-steel-900">EROWA ITS 72</h4>
+        </div>
+        <p class="text-sm text-steel-600 leading-relaxed">
+          Większy system o średnicy 72 mm, przeznaczony do średnich i dużych elektrod oraz detali wymagających większej siły mocowania. Zapewnia stabilne mocowanie cięższych elementów przy zachowaniu pełnej precyzji EROWA.
+        </p>
+      </div>
+      <div class="border border-steel-200 bg-white p-6 transition-all hover:shadow-lg hover:border-accent" data-animate="fade-up">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+          </div>
+          <h4 class="font-heading text-lg font-bold text-steel-900">EROWA MTS</h4>
+        </div>
+        <p class="text-sm text-steel-600 leading-relaxed">
+          System modularny (Modular Tooling System) do palet i większych detali. Idealny do centrów obróbczych CNC i automatyzacji produkcji. Umożliwia szybką wymianę palet z detalami bez konieczności ponownego ustawiania. Siła mocowania do 20 kN.
+        </p>
+      </div>
+      <div class="border border-steel-200 bg-white p-6 transition-all hover:shadow-lg hover:border-accent" data-animate="fade-up">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+          </div>
+          <h4 class="font-heading text-lg font-bold text-steel-900">EROWA PC210</h4>
+        </div>
+        <p class="text-sm text-steel-600 leading-relaxed">
+          PowerChuck o sile mocowania 210 kN — rozwiązanie do ciężkich detali i wymagających operacji frezowania. Stosowany w dużych centrach obróbczych, zapewnia stabilność nawet przy intensywnej obróbce skrawaniem z dużymi siłami.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kompatybilność z maszynami EDM -->
+  <div class="mt-16">
+    <SectionHeading title="Kompatybilność z maszynami EDM" centered={false} />
+    <p class="mt-4 text-steel-600 leading-relaxed max-w-3xl">
+      Systemy mocowania EROWA są kompatybilne z maszynami EDM i centrami obróbczymi wiodących
+      światowych producentów. Pomagamy dobrać odpowiedni adapter do Twojej maszyny.
+    </p>
+    <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" data-stagger="80">
+      {[
+        'Sodick', 'Mitsubishi', 'Fanuc', 'AgieCharmilles (GF)',
+        'ONA', 'Makino', 'OPS-Ingersoll', 'Zimmer & Kreim',
+      ].map(brand => (
+        <div class="flex items-center gap-3 border border-steel-200 bg-white px-4 py-3" data-animate="fade-up">
+          <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="text-sm font-medium text-steel-700">{brand}</span>
+        </div>
+      ))}
+    </div>
+    <p class="mt-4 text-sm text-steel-500">
+      Nie widzisz swojej maszyny na liście? <a href="/kontakt/" class="text-accent hover:underline">Skontaktuj się z nami</a> — dobierzemy odpowiedni adapter.
+    </p>
+  </div>
+
+  <!-- FAQ EROWA -->
+  <div class="mt-16">
+    <SectionHeading title="Często zadawane pytania o EROWA" centered={false} />
+    <div class="mt-8 space-y-4 max-w-3xl" data-stagger="100">
+      <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+        <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+          Czy oprawki EROWA pasują do mojej maszyny EDM?
+          <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+          Systemy EROWA są zaprojektowane jako uniwersalne i współpracują z maszynami EDM wszystkich głównych producentów, w tym Sodick, Mitsubishi, Fanuc, AgieCharmilles, Makino i wielu innych. Do montażu na stole maszyny wymagany jest odpowiedni adapter (chuck), który dobieramy indywidualnie. <a href="/kontakt/" class="text-accent hover:underline">Skontaktuj się z nami</a> z podaniem modelu maszyny, a dobierzemy odpowiedni system.
+        </div>
+      </details>
+
+      <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+        <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+          Ile kosztują oprawki EROWA?
+          <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+          Ceny oprawek EROWA zależą od typu systemu (ITS 50, ITS 72, MTS, PC210), konfiguracji i ilości zamawianych sztuk. Jako dostawca EROWA oferujemy konkurencyjne ceny i indywidualną wycenę dopasowaną do potrzeb klienta. Prosimy o <a href="/kontakt/" class="text-accent hover:underline">kontakt</a> lub telefon pod numer <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline">{company.phone}</a>, aby uzyskać szczegółową ofertę.
+        </div>
+      </details>
+
+      <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+        <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+          Jaki jest czas dostawy oprawek EROWA?
+          <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+          Standardowe oprawki EROWA ITS 50 i ITS 72, które są najczęściej zamawiane, staramy się utrzymywać w bieżącej dostępności. Czas realizacji dla systemów MTS, PC210 oraz niestandardowych konfiguracji ustalamy indywidualnie — zazwyczaj wynosi od 2 do 4 tygodni. Przy pilnych zamówieniach prosimy o kontakt telefoniczny — <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline">{company.phone}</a>.
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="mt-12 text-center">
+    <Button href="/kontakt/" variant="primary" size="lg">
+      Zapytaj o dostępność i cenę
+    </Button>
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA />
+  </div>
+</PageLayout>

@@ -1,0 +1,255 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Button from '@components/ui/Button.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { company } from '@data/company';
+import { localBusinessSchema, breadcrumbSchema } from '@utils/jsonLd';
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Kontakt' },
+];
+
+const jsonLd = [
+  localBusinessSchema(),
+  breadcrumbSchema(breadcrumbs),
+];
+---
+
+<PageLayout
+  title="Kontakt - AK Technic"
+  description="Skontaktuj się z AK Technic. Telefon: +48 602 363 189, email: biuro@ak-technic.pl. Siedziba w Bydgoszczy. Zapytaj o grafit EDM, usługi CNC i materiały eksploatacyjne."
+  breadcrumbs={breadcrumbs}
+  heroTitle="Kontakt"
+  heroSubtitle="Masz pytania? Chętnie pomożemy. Skontaktuj się z nami telefonicznie, mailowo lub wypełnij formularz."
+  jsonLd={jsonLd}
+>
+  <!-- Dlaczego warto się z nami skontaktować -->
+  <div class="mb-16" data-animate="fade-up">
+    <SectionHeading title="Dlaczego warto się z nami skontaktować?" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger="100">
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Bezpłatne doradztwo</h4>
+        <p class="mt-2 text-sm text-steel-600">Pomożemy dobrać optymalny materiał, gatunek grafitu i technologię obróbki do Twojego zastosowania.</p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Szybka wycena</h4>
+        <p class="mt-2 text-sm text-steel-600">Wycenę zapytania ofertowego przygotowujemy w ciągu 24 godzin. Przy pilnych zleceniach - jeszcze szybciej.</p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Indywidualne podejście</h4>
+        <p class="mt-2 text-sm text-steel-600">Każde zapytanie traktujemy indywidualnie. Nie jesteśmy call center - rozmawiasz z ekspertami z branży.</p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Bez zobowiązań</h4>
+        <p class="mt-2 text-sm text-steel-600">Zapytanie ofertowe nie zobowiązuje do zamówienia. Pomagamy porównać opcje i wybrać najlepsze rozwiązanie.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
+    <!-- Contact info -->
+    <div data-animate="fade-right">
+      <h2 class="font-heading text-2xl font-bold text-steel-900">Dane kontaktowe</h2>
+
+      <dl class="mt-6 space-y-6">
+        <div class="flex gap-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+          </div>
+          <div>
+            <dt class="font-medium text-steel-900">{company.fullName}</dt>
+            <dd class="mt-1 text-steel-600">{company.address.street}<br />{company.address.postalCode} {company.address.city}</dd>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="pulse-ring flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+          </div>
+          <div>
+            <dt class="font-medium text-steel-900">Telefon</dt>
+            <dd class="mt-1">
+              <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline text-lg font-medium">{company.phone}</a>
+            </dd>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="pulse-ring flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          </div>
+          <div>
+            <dt class="font-medium text-steel-900">Email</dt>
+            <dd class="mt-1">
+              <a href={`mailto:${company.email}`} class="text-accent hover:underline text-lg">{company.email}</a>
+            </dd>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          </div>
+          <div>
+            <dt class="font-medium text-steel-900">Godziny pracy</dt>
+            <dd class="mt-1 text-steel-600">{company.hours}</dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Contact form -->
+    <div data-animate="fade-left" data-delay="150">
+      <h2 class="font-heading text-2xl font-bold text-steel-900">Formularz kontaktowy</h2>
+      <form class="mt-6 space-y-4" action="https://formspree.io/f/placeholder" method="POST">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="name" class="block text-sm font-medium text-steel-700">Imię i nazwisko *</label>
+            <input type="text" id="name" name="name" required
+              class="mt-1 block w-full border border-steel-300 px-4 py-2.5 text-sm text-steel-900 placeholder:text-steel-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="company" class="block text-sm font-medium text-steel-700">Firma</label>
+            <input type="text" id="company" name="company"
+              class="mt-1 block w-full border border-steel-300 px-4 py-2.5 text-sm text-steel-900 placeholder:text-steel-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="email" class="block text-sm font-medium text-steel-700">Email *</label>
+            <input type="email" id="email" name="email" required
+              class="mt-1 block w-full border border-steel-300 px-4 py-2.5 text-sm text-steel-900 placeholder:text-steel-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-steel-700">Telefon</label>
+            <input type="tel" id="phone" name="phone"
+              class="mt-1 block w-full border border-steel-300 px-4 py-2.5 text-sm text-steel-900 placeholder:text-steel-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent" />
+          </div>
+        </div>
+
+        <div>
+          <label for="subject" class="block text-sm font-medium text-steel-700">Temat *</label>
+          <select id="subject" name="subject" required
+            class="mt-1 block w-full border border-steel-300 px-4 py-2.5 text-sm text-steel-900 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent">
+            <option value="">Wybierz temat...</option>
+            <option value="grafit-edm">Grafit EDM - zapytanie ofertowe</option>
+            <option value="erowa">Oprawki EROWA</option>
+            <option value="materialy">Materiały eksploatacyjne</option>
+            <option value="uslugi">Usługi obróbki CNC</option>
+            <option value="elektrody">Produkcja elektrod EDM</option>
+            <option value="inne">Inne</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-steel-700">Wiadomość *</label>
+          <textarea id="message" name="message" rows="5" required
+            class="mt-1 block w-full border border-steel-300 px-4 py-2.5 text-sm text-steel-900 placeholder:text-steel-400 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            placeholder="Opisz czego potrzebujesz..."></textarea>
+        </div>
+
+        <div>
+          <Button variant="primary" size="lg">
+            Wyślij wiadomość
+          </Button>
+        </div>
+
+        <p class="text-xs text-steel-500">
+          * Pola wymagane. Twoje dane będą przetwarzane wyłącznie w celu odpowiedzi na zapytanie.
+        </p>
+      </form>
+
+      <!-- Response time info box -->
+      <div class="mt-6 flex items-start gap-3 border border-green-200 bg-green-50 p-4">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-100">
+          <svg class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <div>
+          <p class="font-medium text-green-800">Odpowiadamy w ciągu 24 godzin</p>
+          <p class="mt-1 text-sm text-green-700">
+            Na każde zapytanie odpowiadamy w ciągu jednego dnia roboczego. Przy pilnych sprawach
+            prosimy o kontakt telefoniczny pod numer
+            <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="font-medium underline">{company.phone}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Najczęściej zadawane pytania o zamówienia" centered={false} />
+    <div class="mt-8 space-y-6">
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jak złożyć zamówienie na grafit lub elektrody?</h3>
+        <p class="mt-3 text-steel-700">
+          Zamówienie można złożyć telefonicznie pod numerem
+          <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-medium">{company.phone}</a>,
+          mailowo na adres <a href={`mailto:${company.email}`} class="text-accent hover:underline font-medium">{company.email}</a>
+          lub poprzez formularz kontaktowy na tej stronie. W przypadku elektrod na zamówienie prosimy
+          o załączenie dokumentacji technicznej (rysunki 2D/3D, model CAD). Na podstawie zapytania
+          przygotujemy wycenę z terminem realizacji w ciągu 24 godzin.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jaki jest minimalny rozmiar zamówienia?</h3>
+        <p class="mt-3 text-steel-700">
+          Nie mamy sztywnych minimów zamówienia. Realizujemy zarówno pojedyncze prototypy, jak i duże
+          serie produkcyjne. Przy standardowych materiałach (grafit, drut, filtry) wysyłamy już od
+          1 sztuki. Dla usług obróbki CNC minimalna ilość to 1 sztuka. Przy regularnych zamówieniach
+          oferujemy rabaty ilościowe i indywidualne warunki współpracy.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jak wygląda dostawa i jakie są koszty?</h3>
+        <p class="mt-3 text-steel-700">
+          Wysyłamy zamówienia kurierem na terenie całej Polski. Czas dostawy to 1-2 dni robocze
+          od momentu wysyłki. Materiały standardowe z magazynu wysyłamy w ciągu 24 godzin od
+          potwierdzenia zamówienia. Koszty wysyłki są ustalane indywidualnie - przy większych
+          zamówieniach oferujemy darmową dostawę. Możliwy jest również odbiór osobisty w naszej
+          siedzibie w Bydgoszczy ({company.address.street}).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="mt-16" data-animate="fade-up">
+    <h2 class="mb-6 font-heading text-2xl font-bold text-steel-900">Lokalizacja</h2>
+    <div class="w-full overflow-hidden">
+      <iframe
+        class="w-full border-0"
+        style="height: 450px;"
+        src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Fordo%C5%84ska%20169,%20Bydgoszcz&amp;t=p&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Lokalizacja AK Technic - Bydgoszcz"
+      ></iframe>
+    </div>
+  </div>
+</PageLayout>

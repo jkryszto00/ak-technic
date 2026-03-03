@@ -1,0 +1,9 @@
+---
+export const prerender = true;
+import ServicePage from '@components/sections/ServicePage.astro';
+import { services } from '@data/services';
+
+const service = services.find(s => s.slug === 'toczenie-grafitu')!;
+---
+
+<ServicePage service={service} />

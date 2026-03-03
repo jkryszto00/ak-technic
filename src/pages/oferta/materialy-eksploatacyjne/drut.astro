@@ -1,0 +1,268 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Button from '@components/ui/Button.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { consumableCategories } from '@data/products';
+import { company } from '@data/company';
+import { breadcrumbSchema } from '@utils/jsonLd';
+
+const category = consumableCategories.find(c => c.id === 'drut')!;
+const otherCategories = consumableCategories.filter(c => c.id !== 'drut');
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Materiały eksploatacyjne', href: '/oferta/materialy-eksploatacyjne/' },
+  { label: category.name },
+];
+---
+
+<PageLayout
+  title={category.seoTitle}
+  description={category.seoDescription}
+  breadcrumbs={breadcrumbs}
+  heroTitle={category.name}
+  heroSubtitle={category.shortDescription}
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+    <div class="lg:col-span-2 prose max-w-none">
+      <p>
+        Oferujemy szeroki wybór drutów do wycinania elektroerozyjnego (WEDM), dostarczanych bezpośrednio
+        od sprawdzonych producentów. Nasze druty są kompatybilne z maszynami wiodących marek:
+        Sodick, Mitsubishi, Fanuc, AgieCharmilles, Makino, ONA, Accutex i innych. Dzięki wieloletniemu
+        doświadczeniu w branży pomagamy dobrać optymalny typ drutu do konkretnego zastosowania,
+        materiału obrabianego i parametrów maszyny.
+      </p>
+      <p>
+        Drut EDM to kluczowy materiał eksploatacyjny w procesie wycinania elektroerozyjnego. Jego
+        jakość bezpośrednio wpływa na prędkość cięcia, jakość powierzchni, dokładność wymiarową
+        i koszty obróbki. Dlatego w AK Technic oferujemy wyłącznie druty o potwierdzonych
+        parametrach technicznych, gwarantujące powtarzalność wyników.
+      </p>
+
+      <h2>Rodzaje drutów EDM w naszej ofercie</h2>
+
+      <h3>Drut mosiężny (CuZn37 / CuZn40)</h3>
+      <p>
+        Standardowy drut do wycinania elektroerozyjnego, stanowiący podstawowy materiał eksploatacyjny
+        w większości narzędziowni. Drut mosiężny o składzie Cu63/Zn37 oferuje optymalny stosunek
+        jakości do ceny i nadaje się do większości zastosowań WEDM. Dostępne średnice: 0.10 mm,
+        0.15 mm, 0.20 mm, 0.25 mm i 0.30 mm.
+      </p>
+      <p><strong>Zastosowania:</strong> Obróbka ogólna stali narzędziowych, stali hartowanych,
+        aluminium, miedzi i mosiądzu. Idealny do prototypów, małych serii i obróbki detali
+        o standardowych wymaganiach jakości powierzchni (Ra 0.8-1.2 um).</p>
+      <p><strong>Zalety:</strong> Uniwersalność, konkurencyjna cena, łatwa dostępność wszystkich
+        średnic, stabilność procesu cięcia, dobra przepławialność.</p>
+
+      <h3>Drut powlekany (cynk / gamma-faza)</h3>
+      <p>
+        Drut mosiężny z powłoką cynkową lub gamma-fazową, zaprojektowany z myślą o zwiększonej
+        prędkości cięcia i lepszej jakości powierzchni. Powłoka cynkowa obniża temperaturę
+        iskrzenia, co pozwala na zwiększenie parametrów obróbki nawet o 20-30% w porównaniu
+        z drutem mosiężnym. Dostępne średnice: 0.20 mm, 0.25 mm, 0.30 mm.
+      </p>
+      <p><strong>Zastosowania:</strong> Produkcja seryjna matryc i stempli, obróbka precyzyjna
+        z wymaganiami Ra poniżej 0.6 um, cięcie detali o dużej grubości (powyżej 100 mm),
+        obróbka stali szybkotnących i węglików spiekanych.</p>
+      <p><strong>Zalety:</strong> Wyższa prędkość cięcia, lepsza jakość powierzchni, mniejsze
+        naprężenia termiczne, redukcja kosztów jednostkowych przy produkcji seryjnej,
+        mniejsze ryzyko zerwania drutu.</p>
+
+      <h3>Drut molibdenowy</h3>
+      <p>
+        Drut przeznaczony do maszyn z systemem odwijania wielokrotnego (typu CW). Wykonany
+        z czystego molibdenu, charakteryzuje się wyjątkową wytrzymałością na rozciąganie
+        (do 1960 MPa) i odpornością na zużycie. Średnica standardowa: 0.18 mm.
+      </p>
+      <p><strong>Zastosowania:</strong> Maszyny WEDM typu CW (odwijanie wielokrotne) producentów
+        takich jak Seibu, Sodick, Mitsubishi. Obróbka stali narzędziowych i hartowanych,
+        materiałów o dużej twardości.</p>
+      <p><strong>Zalety:</strong> Wielokrotne użycie tego samego odcinka drutu, niższe koszty
+        eksploatacyjne, wysoka wytrzymałość mechaniczna, odporność na korozję.</p>
+    </div>
+
+    <aside>
+      <div class="sticky top-24 space-y-6">
+        <div class="border border-steel-200 p-6">
+          <h3 class="font-heading text-lg font-bold text-steel-900">Inne materiały</h3>
+          <ul class="mt-4 space-y-2">
+            {otherCategories.map(c => (
+              <li>
+                <a href={`/oferta/materialy-eksploatacyjne/${c.slug}/`} class="text-sm text-steel-600 hover:text-accent transition-colors">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="border border-accent/20 bg-accent/5 p-6">
+          <h3 class="font-heading font-bold text-steel-900">Potrzebujesz pomocy?</h3>
+          <p class="mt-2 text-sm text-steel-600">Doradzimy w doborze drutu do Twojej maszyny.</p>
+          <p class="mt-3 text-sm font-medium text-accent">
+            <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="hover:underline">{company.phone}</a>
+          </p>
+          <Button href="/kontakt/" variant="dark" size="sm" class="mt-4">Skontaktuj się</Button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Technical Parameters Table -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Parametry techniczne drutów EDM" centered={false} />
+    <div class="mt-8 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-steel-900 text-white">
+            <th class="px-4 py-3 text-left font-medium">Parametr</th>
+            <th class="px-4 py-3 text-left font-medium">Drut mosiężny</th>
+            <th class="px-4 py-3 text-left font-medium">Drut powlekany</th>
+            <th class="px-4 py-3 text-left font-medium">Drut molibdenowy</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-steel-200">
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Materiał rdzenia</td>
+            <td class="px-4 py-3 text-steel-700">CuZn37 / CuZn40</td>
+            <td class="px-4 py-3 text-steel-700">CuZn37 + powłoka Zn</td>
+            <td class="px-4 py-3 text-steel-700">Mo 99.95%</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Dostępne średnice</td>
+            <td class="px-4 py-3 text-steel-700">0.10 - 0.30 mm</td>
+            <td class="px-4 py-3 text-steel-700">0.20 - 0.30 mm</td>
+            <td class="px-4 py-3 text-steel-700">0.18 mm</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Wytrzymałość na rozciąganie</td>
+            <td class="px-4 py-3 text-steel-700">900 - 1100 MPa</td>
+            <td class="px-4 py-3 text-steel-700">900 - 1100 MPa</td>
+            <td class="px-4 py-3 text-steel-700">1800 - 1960 MPa</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Prędkość cięcia (względna)</td>
+            <td class="px-4 py-3 text-steel-700">100% (bazowa)</td>
+            <td class="px-4 py-3 text-steel-700">120-130%</td>
+            <td class="px-4 py-3 text-steel-700">80-90%</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Jakość powierzchni (Ra)</td>
+            <td class="px-4 py-3 text-steel-700">0.8 - 1.2 um</td>
+            <td class="px-4 py-3 text-steel-700">0.4 - 0.8 um</td>
+            <td class="px-4 py-3 text-steel-700">1.0 - 1.6 um</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Typ maszyny</td>
+            <td class="px-4 py-3 text-steel-700">Jednokierunkowe</td>
+            <td class="px-4 py-3 text-steel-700">Jednokierunkowe</td>
+            <td class="px-4 py-3 text-steel-700">Wielokierunkowe (CW)</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="px-4 py-3 font-medium text-steel-900">Szpula</td>
+            <td class="px-4 py-3 text-steel-700">5 kg, 8 kg, 16 kg</td>
+            <td class="px-4 py-3 text-steel-700">5 kg, 8 kg, 16 kg</td>
+            <td class="px-4 py-3 text-steel-700">Szpulki 2000 m</td>
+          </tr>
+          <tr class="bg-steel-50">
+            <td class="px-4 py-3 font-medium text-steel-900">Zastosowanie</td>
+            <td class="px-4 py-3 text-steel-700">Uniwersalne</td>
+            <td class="px-4 py-3 text-steel-700">Precyzyjne, seryjne</td>
+            <td class="px-4 py-3 text-steel-700">Maszyny CW</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Why buy from us -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Dlaczego warto kupować u nas?" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger="100">
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Konkurencyjne ceny</h4>
+        <p class="mt-2 text-sm text-steel-600">Bezpośrednie relacje z producentami pozwalają nam oferować atrakcyjne ceny przy zachowaniu najwyższej jakości.</p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Szybka dostawa</h4>
+        <p class="mt-2 text-sm text-steel-600">Magazyn w Bydgoszczy zapewnia szybką realizację zamówień. Popularne średnice i gatunki zawsze w stanie magazynowym.</p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Doradztwo techniczne</h4>
+        <p class="mt-2 text-sm text-steel-600">Pomagamy dobrać drut do maszyny, materiału obrabianego i wymagań jakościowych. Wieloletnie doświadczenie w branży.</p>
+      </div>
+      <div class="border border-steel-200 p-6" data-animate="fade-up">
+        <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+          <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h4 class="mt-4 font-heading font-semibold text-steel-900">Gwarancja jakości</h4>
+        <p class="mt-2 text-sm text-steel-600">Dostarczamy wyłącznie drut o potwierdzonych parametrach z certyfikatami producenta. Stała powtarzalność wyników.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="mt-16" data-animate="fade-up">
+    <SectionHeading title="Najczęściej zadawane pytania" centered={false} />
+    <div class="mt-8 space-y-6">
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jak dobrać średnicę drutu EDM do mojego zastosowania?</h3>
+        <p class="mt-3 text-steel-700">
+          Wybór średnicy drutu zależy od kilku czynników: minimalnego promienia wewnętrznego detalu,
+          grubości materiału obrabianego i wymaganej dokładności. Ogólna zasada mówi, że minimalny
+          promień wewnętrzny wynosi ok. 1.5x średnicy drutu. Drut 0.25 mm to najpopularniejszy wybór
+          uniwersalny. Drut 0.20 mm stosuje się przy mniejszych promieniach i cieńszych materiałach,
+          natomiast 0.30 mm przy grubych materiałach i wymaganiach na maksymalną prędkość cięcia.
+          Druty o średnicy 0.10-0.15 mm to rozwiązania do mikro-obróbki i elementów o bardzo
+          małych tolerancjach. Jeśli potrzebujesz pomocy w doborze, skontaktuj się z nami pod
+          numerem <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-medium">{company.phone}</a>.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Czym różni się drut powlekany od mosiężnego i kiedy warto go stosować?</h3>
+        <p class="mt-3 text-steel-700">
+          Drut powlekany posiada dodatkową warstwę cynku lub gamma-fazy nałożoną na rdzeń mosiężny.
+          Powłoka ta obniża temperaturę topnienia w strefie iskrzenia, co przekłada się na
+          wyższą prędkość cięcia (nawet o 20-30%), lepszą jakość powierzchni i mniejsze
+          naprężenia termiczne. Drut powlekany jest szczególnie opłacalny przy produkcji seryjnej,
+          obróbce grubych materiałów (powyżej 80 mm), a także gdy wymagana jest jakość powierzchni
+          Ra poniżej 0.6 um. Mimo wyższej ceny jednostkowej, koszt obróbki na detal jest często
+          niższy dzięki skróceniu czasu cięcia.
+        </p>
+      </div>
+      <div class="border border-steel-200 p-6">
+        <h3 class="font-heading text-lg font-bold text-steel-900">Jakie druty pasują do mojej maszyny EDM?</h3>
+        <p class="mt-3 text-steel-700">
+          Większość nowoczesnych maszyn WEDM jednokierunkowych (Sodick, Mitsubishi, Fanuc,
+          AgieCharmilles, Makino) jest kompatybilna zarówno z drutem mosiężnym, jak i powlekanym.
+          Kluczowe jest dobranie odpowiedniej średnicy drutu do prowadnic maszyny i parametrów
+          technologicznych. Maszyny z systemem odwijania wielokrotnego (CW) wymagają drutu
+          molibdenowego. Jeśli nie jesteś pewien, jaki drut wybrać do swojej maszyny, wystarczy
+          podać nam jej markę i model - dobierzemy optymalny typ i średnicę drutu.
+          Zadzwoń: <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-medium">{company.phone}</a>
+          lub napisz na <a href={`mailto:${company.email}`} class="text-accent hover:underline font-medium">{company.email}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16"><ContactCTA title="Potrzebujesz drutu EDM? Skontaktuj się z nami!" subtitle="Doradzimy w doborze drutu do Twojej maszyny i zastosowania. Szybka wycena i dostawa." /></div>
+</PageLayout>

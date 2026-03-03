@@ -1,0 +1,32 @@
+---
+interface Spec {
+  label: string;
+  value: string;
+  unit?: string;
+}
+
+interface Props {
+  specs: Spec[];
+  title?: string;
+}
+
+const { specs, title = 'Specyfikacja techniczna' } = Astro.props;
+---
+
+<div>
+  <h3 class="mb-4 font-heading text-xl font-bold text-steel-900">{title}</h3>
+  <div class="overflow-hidden border border-steel-200">
+    <table class="table-hover w-full">
+      <tbody>
+        {specs.map((spec, index) => (
+          <tr class={index % 2 === 0 ? 'bg-steel-50' : 'bg-white'}>
+            <td class="px-4 py-3 text-sm font-medium text-steel-700">{spec.label}</td>
+            <td class="px-4 py-3 text-right text-sm font-semibold text-steel-900">
+              {spec.value}{spec.unit ? ` ${spec.unit}` : ''}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

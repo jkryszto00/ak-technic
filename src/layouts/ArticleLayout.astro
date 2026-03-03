@@ -1,0 +1,226 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@components/ui/Breadcrumbs.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import { articleSchema, breadcrumbSchema } from '@utils/jsonLd';
+import { categories } from '@utils/categories';
+import { company } from '@data/company';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  category: string;
+  tags?: string[];
+  author?: string;
+  headings?: Array<{ depth: number; slug: string; text: string }>;
+  articleId?: string;
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  updatedDate,
+  category,
+  tags = [],
+  author = 'AK Technic',
+  headings = [],
+  articleId,
+} = Astro.props;
+
+const categoryLabel = categories[category as keyof typeof categories] || category;
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Baza wiedzy', href: '/baza-wiedzy/' },
+  { label: categoryLabel },
+];
+
+const jsonLd = [
+  articleSchema({
+    title,
+    description,
+    url: new URL(Astro.url.pathname, Astro.site).toString(),
+    publishDate,
+    updatedDate,
+    author,
+  }),
+  breadcrumbSchema(breadcrumbs),
+];
+
+const formattedDate = publishDate.toLocaleDateString('pl-PL', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Related articles (same category, excluding current)
+const allArticles = await getCollection('blog', ({ data }) => !data.draft);
+const relatedArticles = allArticles
+  .filter(a => a.data.category === category && a.id !== articleId)
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="bg-steel-800 py-12 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} dark />
+      <div class="mt-4 flex flex-wrap items-center gap-3">
+        <a
+          href={`/baza-wiedzy/kategoria/${category}/`}
+          class="inline-block bg-accent px-3 py-1 text-sm font-medium text-white hover:bg-accent/90 transition-colors"
+        >
+          {categoryLabel}
+        </a>
+        <time datetime={publishDate.toISOString()} class="text-sm text-steel-400">
+          {formattedDate}
+        </time>
+        <span class="text-sm text-steel-400">|</span>
+        <span class="text-sm text-steel-400">{author}</span>
+      </div>
+      <h1 class="mt-3 font-heading text-3xl font-bold md:text-4xl">{title}</h1>
+      <p class="mt-2 text-lg text-steel-300">{description}</p>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_280px]">
+      <!-- Article column -->
+      <div>
+        <article class="prose max-w-none">
+          <slot />
+        </article>
+
+        <!-- Tags -->
+        {tags.length > 0 && (
+          <div class="mt-10 border-t border-steel-200 pt-6">
+            <p class="mb-3 text-xs font-medium uppercase tracking-wider text-steel-400">Tagi</p>
+            <div class="flex flex-wrap gap-2">
+              {tags.map(tag => (
+                <a
+                  href={`/baza-wiedzy/tag/${tag}/`}
+                  class="border border-steel-200 bg-steel-50 px-3 py-1 text-sm text-steel-600 transition-colors hover:border-accent hover:text-accent"
+                >
+                  {tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Author -->
+        <div class="mt-6 pt-4">
+          <div class="flex items-start gap-5 bg-steel-50 border border-steel-200 p-6">
+            <div class="flex h-14 w-14 shrink-0 items-center justify-center bg-steel-800 text-white">
+              {author === company.name ? (
+                <img
+                  src={company.logo}
+                  alt={company.logoAlt}
+                  class="h-9 w-9 object-contain"
+                  loading="lazy"
+                />
+              ) : (
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              )}
+            </div>
+            <div class="min-w-0">
+              <p class="text-xs font-medium uppercase tracking-wider text-steel-400">O autorze</p>
+              <p class="mt-1 font-heading text-base font-bold text-steel-900">{author}</p>
+              {author === company.name ? (
+                <p class="mt-1 text-sm leading-relaxed text-steel-600">
+                  {company.description}
+                </p>
+              ) : (
+                <p class="mt-1 text-sm leading-relaxed text-steel-600">
+                  Autor artykułów w bazie wiedzy AK Technic.
+                </p>
+              )}
+              {author === company.name && (
+                <a
+                  href="/kontakt/"
+                  class="mt-3 inline-flex items-center text-sm font-medium text-accent transition-colors hover:text-accent/80"
+                >
+                  Skontaktuj się z nami
+                  <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <!-- Related articles -->
+        {relatedArticles.length > 0 && (
+          <div class="mt-10 border-t border-steel-200 pt-8">
+            <h2 class="mb-6 font-heading text-xl font-bold text-steel-900">Przeczytaj również</h2>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedArticles.map(article => (
+                <a
+                  href={`/baza-wiedzy/${article.id}/`}
+                  class="group flex flex-col border border-steel-200 bg-white p-5 transition-all hover:shadow-md hover:-translate-y-0.5"
+                >
+                  <time
+                    datetime={article.data.publishDate.toISOString()}
+                    class="text-xs text-steel-400"
+                  >
+                    {article.data.publishDate.toLocaleDateString('pl-PL', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  <h3 class="mt-2 font-heading text-sm font-bold text-steel-900 group-hover:text-accent transition-colors">
+                    {article.data.title}
+                  </h3>
+                  <p class="mt-1 flex-1 text-xs text-steel-500 line-clamp-2">{article.data.description}</p>
+                  <span class="mt-3 inline-flex items-center text-xs font-medium text-accent">
+                    Czytaj więcej
+                    <svg class="ml-1 h-3 w-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- TOC sidebar -->
+      {headings.length > 0 && (
+        <aside class="hidden lg:block">
+          <div class="sticky top-8">
+            <h2 class="mb-4 font-heading text-sm font-bold uppercase tracking-wider text-steel-500">
+              Spis treści
+            </h2>
+            <nav>
+              <ul class="space-y-2 text-sm">
+                {headings
+                  .filter(h => h.depth <= 3)
+                  .map(heading => (
+                    <li class={heading.depth === 3 ? 'ml-4' : ''}>
+                      <a
+                        href={`#${heading.slug}`}
+                        class="text-steel-600 transition-colors hover:text-accent"
+                      >
+                        {heading.text}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      )}
+    </div>
+  </div>
+
+  <ContactCTA />
+</BaseLayout>

@@ -1,0 +1,184 @@
+---
+export const prerender = true;
+import PageLayout from '@layouts/PageLayout.astro';
+import Card from '@components/ui/Card.astro';
+import Button from '@components/ui/Button.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { graphiteProducts } from '@data/products';
+import { breadcrumbSchema } from '@utils/jsonLd';
+import { company } from '@data/company';
+
+const breadcrumbs = [
+  { label: 'Główna', href: '/' },
+  { label: 'Oferta' },
+  { label: 'Grafit EDM' },
+];
+---
+
+<PageLayout
+  title="Grafit EDM - SGL Carbon | Oficjalny dystrybutor"
+  description="Grafit EDM od SGL Carbon - gatunki R8710, R8650, R8500 i R8510. Oficjalny dystrybutor w Polsce. Dobór grafitu do każdego zastosowania EDM."
+  breadcrumbs={breadcrumbs}
+  heroTitle="Grafit EDM od SGL Carbon"
+  heroSubtitle="Oficjalny dystrybutor grafitu izotropowego SGL Carbon na Polskę. Dobieramy optymalny gatunek do Twojego zastosowania."
+  jsonLd={breadcrumbSchema(breadcrumbs)}
+>
+  <!-- Intro -->
+  <div class="prose max-w-none" data-animate="fade-up">
+    <p>
+      Jako oficjalny dystrybutor SGL Carbon na Polskę oferujemy pełną gamę grafitów EDM
+      przeznaczonych do obróbki elektroerozyjnej. Nasze grafity charakteryzują się izotropowymi
+      właściwościami, co zapewnia jednakowe parametry obróbki niezależnie od kierunku.
+    </p>
+    <p>
+      Wybór odpowiedniego gatunku grafitu ma kluczowe znaczenie dla jakości obróbki EDM.
+      Główne kryteria doboru to: wielkość ziarna, gęstość, wytrzymałość mechaniczna oraz
+      wymagana jakość powierzchni elektrody i obrabianego detalu. Niewłaściwy dobór materiału
+      elektrodowego prowadzi do zwiększonego zużycia, gorszej jakości powierzchni i wyższych
+      kosztów produkcji.
+    </p>
+    <p>
+      Grafit izotropowy SGL Carbon produkowany jest metodą izostatycznego prasowania, dzięki czemu
+      uzyskuje jednorodną strukturę i identyczne właściwości we wszystkich osiach. To kluczowa
+      przewaga nad grafitami ekstrudowanymi, które wykazują różnice parametrów w zależności od
+      kierunku obróbki. W praktyce oznacza to bardziej przewidywalne zużycie elektrody, lepszą
+      powtarzalność wymiarową i wyższą jakość powierzchni obrobionego detalu.
+    </p>
+    <p>
+      W naszej ofercie dostępne są 4 gatunki grafitu o wielkości ziarna od 5 &mu;m (R8710 — do
+      ultraprecyzyjnych mikroelektrod) do 25 &mu;m (R8510 — do dużych elektrod, gdzie priorytetem
+      jest ekonomika obróbki). Każdy gatunek jest dostępny w postaci bloków, płyt i prętów,
+      a na życzenie wykonujemy również <a href="/uslugi/frezowanie-grafitu/" class="text-accent hover:underline">cięcie i frezowanie CNC na wymiar</a>.
+    </p>
+  </div>
+
+  <!-- Comparison table -->
+  <div class="mt-12">
+    <SectionHeading title="Porównanie gatunków" centered={false} />
+    <div class="mt-6 overflow-x-auto" data-animate="fade-up" data-delay="100">
+      <table class="table-hover w-full border-collapse border border-steel-200">
+        <thead>
+          <tr class="bg-steel-800 text-white">
+            <th class="px-4 py-3 text-left text-sm font-medium">Parametr</th>
+            {graphiteProducts.map(p => (
+              <th class="px-4 py-3 text-center text-sm font-medium">{p.name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {['Wielkość ziarna', 'Gęstość', 'Wytrzymałość na zginanie', 'Wytrzymałość na ściskanie', 'Twardość Shore'].map((label, rowIdx) => (
+            <tr class={rowIdx % 2 === 0 ? 'bg-steel-50' : 'bg-white'}>
+              <td class="border-r border-steel-200 px-4 py-3 text-sm font-medium text-steel-700">{label}</td>
+              {graphiteProducts.map(p => {
+                const spec = p.specs.find(s => s.label === label);
+                return (
+                  <td class="border-r border-steel-200 px-4 py-3 text-center text-sm text-steel-900">
+                    {spec ? `${spec.value} ${spec.unit || ''}`.trim() : '-'}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Jak dobrać gatunek -->
+  <div class="mt-16">
+    <SectionHeading title="Jak dobrać gatunek grafitu EDM?" centered={false} />
+    <p class="mt-4 text-steel-600 leading-relaxed max-w-3xl">
+      Dobór odpowiedniego gatunku grafitu powinien uwzględniać cztery kluczowe kryteria. Poniżej przedstawiamy najważniejsze czynniki, które pomogą podjąć właściwą decyzję.
+    </p>
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2" data-stagger="100">
+      <div class="border border-steel-200 bg-white p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10 mb-4">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <h4 class="font-heading font-bold text-steel-900">Wymagania jakościowe</h4>
+        <p class="mt-2 text-sm text-steel-600 leading-relaxed">
+          Im mniejsze ziarno grafitu, tym lepsza jakość powierzchni (Ra) i dokładność odwzorowania detali. Do precyzyjnych form z drobnymi żebrami i teksturą wybierz R8710 (5 &mu;m). Do zastosowań standardowych wystarczy R8650 (8 &mu;m).
+        </p>
+      </div>
+      <div class="border border-steel-200 bg-white p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10 mb-4">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+        </div>
+        <h4 class="font-heading font-bold text-steel-900">Wielkość elektrody</h4>
+        <p class="mt-2 text-sm text-steel-600 leading-relaxed">
+          Duże elektrody (powyżej 200 mm) lepiej wykonywać z grafitów o większym ziarnie (R8500 lub R8510), które są łatwiejsze w obróbce i bardziej ekonomiczne. Mikroelektrody wymagają drobnego ziarna dla zachowania ostrości krawędzi.
+        </p>
+      </div>
+      <div class="border border-steel-200 bg-white p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10 mb-4">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <h4 class="font-heading font-bold text-steel-900">Budżet projektu</h4>
+        <p class="mt-2 text-sm text-steel-600 leading-relaxed">
+          Gatunki o drobnym ziarnie (R8710) są droższe, ale zapewniają niższe zużycie elektrody i lepszą jakość. Przy dużych seriach elektrod ekonomiczne gatunki (R8510, R8500) mogą znacząco obniżyć koszty materiałowe bez istotnej utraty jakości.
+        </p>
+      </div>
+      <div class="border border-steel-200 bg-white p-6" data-animate="fade-up">
+        <div class="flex h-10 w-10 items-center justify-center rounded bg-accent/10 mb-4">
+          <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+        </div>
+        <h4 class="font-heading font-bold text-steel-900">Typ zastosowania</h4>
+        <p class="mt-2 text-sm text-steel-600 leading-relaxed">
+          Obróbka zgrubna toleruje grubsze ziarno i niższą gęstość, podczas gdy obróbka wykończeniowa wymaga materiałów premium. Przy obróbce stali hartowanej i węglików spiekanych zalecamy grafity o wysokiej gęstości (R8710, R8650) dla minimalnego zużycia.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product cards -->
+  <div class="mt-16">
+    <SectionHeading title="Nasze gatunki grafitu" centered={false} />
+    <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2" data-stagger="100">
+      {graphiteProducts.map(product => (
+        <a
+          href={`/oferta/grafit-edm/${product.slug}/`}
+          class="group flex flex-col border border-steel-200 bg-white p-6 transition-all hover:shadow-lg hover:border-accent"
+          data-animate="fade-up"
+        >
+          <h3 class="font-heading text-xl font-bold text-steel-900 group-hover:text-accent">
+            {product.name}
+          </h3>
+          <p class="mt-2 flex-1 text-sm text-steel-600">{product.shortDescription}</p>
+          <div class="mt-4 flex items-center gap-4 text-xs text-steel-500">
+            <span>Ziarno: {product.specs[0]?.value} {product.specs[0]?.unit}</span>
+            <span>Gęstość: {product.specs[1]?.value} {product.specs[1]?.unit}</span>
+          </div>
+          <span class="mt-4 inline-flex items-center text-sm font-medium text-accent">
+            Zobacz szczegóły
+            <svg class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="mt-16 border border-accent/20 bg-accent/5 p-8 md:p-10 text-center" data-animate="scale-in">
+    <h3 class="font-heading text-2xl font-bold text-steel-900">Nie wiesz, który grafit wybrać?</h3>
+    <p class="mt-3 text-steel-600 max-w-2xl mx-auto leading-relaxed">
+      Skorzystaj z bezpłatnej konsultacji technicznej. Nasi eksperci z wieloletnim doświadczeniem
+      w branży EDM pomogą dobrać optymalny gatunek grafitu do Twojego zastosowania, uwzględniając
+      wymagania jakościowe, wymiary elektrod i budżet projektu.
+    </p>
+    <p class="mt-4 text-steel-700 font-medium">
+      Zadzwoń: <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="text-accent hover:underline font-bold">{company.phone}</a>
+      <span class="mx-2 text-steel-300">|</span>
+      Napisz: <a href={`mailto:${company.email}`} class="text-accent hover:underline font-bold">{company.email}</a>
+    </p>
+    <div class="mt-6">
+      <Button href="/kontakt/" variant="primary" size="lg">Wyślij zapytanie ofertowe</Button>
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <ContactCTA />
+  </div>
+</PageLayout>

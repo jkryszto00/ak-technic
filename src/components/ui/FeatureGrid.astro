@@ -1,0 +1,35 @@
+---
+interface Feature {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  features: Feature[];
+  columns?: 2 | 3 | 4;
+}
+
+const { features, columns = 3 } = Astro.props;
+
+const gridCols: Record<number, string> = {
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-2 lg:grid-cols-3',
+  4: 'md:grid-cols-2 lg:grid-cols-4',
+};
+---
+
+<div class={`grid grid-cols-1 gap-6 ${gridCols[columns]}`} data-stagger="80">
+  {features.map(feature => (
+    <div class="group/feat flex gap-4" data-animate="fade-up">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10 transition-all duration-300 group-hover/feat:bg-accent group-hover/feat:shadow-lg group-hover/feat:shadow-accent/25">
+        <svg class="h-5 w-5 text-accent transition-colors duration-300 group-hover/feat:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div>
+        <h4 class="font-heading font-semibold text-steel-900">{feature.title}</h4>
+        <p class="mt-1 text-sm text-steel-600">{feature.description}</p>
+      </div>
+    </div>
+  ))}
+</div>

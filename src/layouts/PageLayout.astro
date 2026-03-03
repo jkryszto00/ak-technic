@@ -1,0 +1,29 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '@components/ui/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  breadcrumbs: Array<{ label: string; href?: string }>;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, breadcrumbs, heroTitle, heroSubtitle, jsonLd } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="relative bg-steel-800 py-12 text-white overflow-hidden">
+    <div class="hero-pattern absolute inset-0"></div>
+    <div class="hero-animate relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} dark />
+      <h1 class="mt-4 font-heading text-3xl font-bold md:text-4xl">{heroTitle || title}</h1>
+      {heroSubtitle && <p class="mt-2 text-lg text-steel-300">{heroSubtitle}</p>}
+    </div>
+  </section>
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <slot />
+  </div>
+</BaseLayout>
