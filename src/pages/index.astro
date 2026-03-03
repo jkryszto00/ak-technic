@@ -1,50 +1,283 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+export const prerender = true;
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/ui/Button.astro';
+import Card from '@components/ui/Card.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import ContactCTA from '@components/ui/ContactCTA.astro';
+import ProductSpecTable from '@components/ui/ProductSpecTable.astro';
+import { company } from '@data/company';
+import { graphiteProducts } from '@data/products';
+import { services } from '@data/services';
+import { organizationSchema, localBusinessSchema } from '@utils/jsonLd';
+
+const featuredProduct = graphiteProducts[0]; // R8710
+const jsonLd = [organizationSchema(), localBusinessSchema()];
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<BaseLayout title="Grafit EDM, Oprawki EROWA, Obróbka CNC | AK Technic Bydgoszcz" jsonLd={jsonLd}>
+
+  <!-- HERO -->
+  <section class="relative bg-steel-900 py-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-steel-900 via-steel-800 to-steel-900"></div>
+    <div class="hero-pattern absolute inset-0"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="hero-animate max-w-3xl">
+        <span class="inline-flex items-center gap-2 border border-accent/40 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
+          <img src="/images/logo/sgl-carbon-logo.svg" alt="SGL Carbon" class="h-4 w-auto brightness-0 invert opacity-80" />
+          Oficjalny dystrybutor
+        </span>
+        <h1 class="mt-6 font-heading text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+          Grafit EDM i rozwiązania<br class="hidden lg:block" />
+          <span class="text-gradient">dla przemysłu</span>
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-steel-300 md:text-xl">
+          Od {company.founded} roku dostarczamy profesjonalne rozwiązania dla przemysłu narzędziowego.
+          Ponad {new Date().getFullYear() - company.founded} lat doświadczenia, 4 gatunki grafitu SGL Carbon w stałej ofercie
+          i setki zrealizowanych projektów dla klientów z całej Polski. Grafit EDM, oprawki EROWA,
+          materiały eksploatacyjne oraz kompleksowe usługi obróbki CNC grafitu i metalu.
+        </p>
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <Button href="/oferta/grafit-edm/" variant="primary" size="lg">
+            Poznaj naszą ofertę
+          </Button>
+          <Button href="/kontakt/" variant="secondary" size="lg">
+            Skontaktuj się
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="border-b border-steel-200 bg-steel-50 py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-6 md:grid-cols-4" data-stagger="100">
+        {[
+          { icon: 'calendar', text: `${new Date().getFullYear() - company.founded}+ lat doświadczenia` },
+          { icon: 'award', text: 'Oficjalny dystrybutor SGL Carbon' },
+          { icon: 'truck', text: 'Dostawa na terenie całej Polski' },
+          { icon: 'headphones', text: 'Profesjonalne wsparcie techniczne' },
+        ].map(item => (
+          <div class="flex items-center gap-3" data-animate="fade-up">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-accent/10">
+              {item.icon === 'calendar' && (
+                <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              )}
+              {item.icon === 'award' && (
+                <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+              )}
+              {item.icon === 'truck' && (
+                <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
+              )}
+              {item.icon === 'headphones' && (
+                <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+              )}
+            </div>
+            <span class="text-sm font-medium text-steel-700">{item.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NASZA OFERTA -->
+  <section class="py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        title="Nasza Oferta"
+        subtitle="Kompleksowe zaopatrzenie dla przemysłu narzędziowego i EDM"
+      />
+      <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3" data-stagger="120">
+        <Card
+          title="Grafit EDM"
+          description="Wysokiej jakości grafit izotropowy od SGL Carbon. Gatunki R8710, R8650, R8500 i R8510 do każdego zastosowania EDM."
+          href="/oferta/grafit-edm/"
+          badge="SGL Carbon"
+        >
+          <div slot="image" class="flex aspect-[4/3] items-center justify-center bg-steel-100 text-steel-400">
+            <svg class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+          </div>
+        </Card>
+
+        <Card
+          title="Oprawki EROWA"
+          description="Systemy mocowania EROWA zapewniające najwyższą powtarzalność pozycjonowania. Idealne do obróbki EDM."
+          href="/oferta/erowa/"
+          badge="EROWA"
+        >
+          <div slot="image" class="flex aspect-[4/3] items-center justify-center bg-steel-100 text-steel-400">
+            <svg class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+        </Card>
+
+        <Card
+          title="Materiały eksploatacyjne"
+          description="Drut EDM, filtry, elektrody i frezy. Materiały eksploatacyjne kompatybilne z popularnymi markami maszyn."
+          href="/oferta/materialy-eksploatacyjne/"
+        >
+          <div slot="image" class="flex aspect-[4/3] items-center justify-center bg-steel-100 text-steel-400">
+            <svg class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCT -->
+  <section class="bg-steel-50 py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div data-animate="fade-right">
+          <span class="inline-block bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+            Wyróżniony produkt
+          </span>
+          <h2 class="mt-4 font-heading text-3xl font-bold text-steel-900">
+            Grafit EDM {featuredProduct.name}
+          </h2>
+          <p class="mt-4 leading-relaxed text-steel-700">{featuredProduct.description}</p>
+
+          <div class="mt-6">
+            <ProductSpecTable specs={featuredProduct.specs.slice(0, 4)} title="Kluczowe parametry" />
+          </div>
+
+          <div class="mt-6">
+            <Button href={`/oferta/grafit-edm/${featuredProduct.slug}/`} variant="primary">
+              Dowiedz się więcej o {featuredProduct.name}
+            </Button>
+          </div>
+        </div>
+
+        <div class="flex aspect-square items-center justify-center bg-steel-200 text-steel-400" data-animate="fade-left" data-delay="200">
+          <svg class="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NASZE USŁUGI -->
+  <section class="py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        title="Nasze Usługi"
+        subtitle="Profesjonalna obróbka CNC grafitu i metalu"
+      />
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" data-stagger="100">
+        {services.map(service => (
+          <a
+            href={`/uslugi/${service.slug}/`}
+            class="group border border-steel-200 bg-white p-6 transition-all hover:shadow-lg hover:-translate-y-1 hover:border-accent"
+            data-animate="fade-up"
+          >
+            <div class="flex h-12 w-12 items-center justify-center rounded bg-accent/10">
+              <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="mt-4 font-heading text-base font-bold text-steel-900 group-hover:text-accent transition-colors">
+              {service.name}
+            </h3>
+            <p class="mt-2 text-sm text-steel-600">{service.shortDescription}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- O FIRMIE -->
+  <section class="bg-steel-50 py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div data-animate="fade-right">
+          <SectionHeading title="O firmie AK Technic" centered={false} />
+          <p class="mt-6 leading-relaxed text-steel-700">
+            AK Technic to firma z wieloletnim doświadczeniem w branży obróbki elektroerozyjnej.
+            Od {company.founded} roku jesteśmy oficjalnym dystrybutorem grafitu SGL Carbon na Polskę,
+            co pozwala nam oferować najwyższej jakości materiały bezpośrednio od producenta.
+          </p>
+          <p class="mt-4 leading-relaxed text-steel-700">
+            Naszym klientom oferujemy nie tylko produkty, ale również kompleksowe wsparcie techniczne,
+            doradztwo w doborze materiałów oraz usługi obróbki CNC. Działamy na terenie całej Polski,
+            realizując zamówienia zarówno dla małych warsztatów, jak i dużych zakładów produkcyjnych.
+          </p>
+          <div class="mt-6">
+            <Button href="/o-nas/" variant="dark">
+              Więcej o nas
+            </Button>
+          </div>
+        </div>
+        <div class="flex aspect-video items-center justify-center bg-steel-200 text-steel-400" data-animate="fade-left" data-delay="200">
+          <svg class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 md:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        title="Najczęściej zadawane pytania"
+        subtitle="Odpowiedzi na popularne pytania dotyczące grafitu EDM i obróbki elektroerozyjnej"
+      />
+      <div class="mt-12 mx-auto max-w-3xl space-y-4" data-stagger="100">
+        <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+          <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+            Jaki gatunek grafitu EDM wybrać do precyzyjnych elektrod?
+            <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+            Do precyzyjnych elektrod EDM o drobnych detalach rekomendujemy grafit <strong>R8710</strong> o wielkości ziarna 5 &mu;m. Zapewnia on najlepszą jakość powierzchni i pozwala na odwzorowanie nawet bardzo drobnych szczegółów geometrii. Dla elektrod średniej wielkości optymalnym wyborem jest <strong>R8650</strong> (8 &mu;m), który oferuje dobry kompromis między precyzją a ekonomiką obróbki.
+          </div>
+        </details>
+
+        <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+          <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+            Czym różni się grafit izotropowy od anizotropowego?
+            <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+            Grafit izotropowy (taki jak oferowane przez nas gatunki SGL Carbon) ma jednakowe właściwości mechaniczne i elektryczne we wszystkich kierunkach. Oznacza to przewidywalne i powtarzalne parametry obróbki EDM niezależnie od orientacji elektrody. Grafit anizotropowy ma różne właściwości w zależności od kierunku, co może prowadzić do nierównomiernego zużycia elektrody i niższej jakości powierzchni.
+          </div>
+        </details>
+
+        <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+          <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+            Czy oferujecie cięcie grafitu na wymiar?
+            <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+            Tak, oferujemy <strong>cięcie grafitu na wymiar</strong> oraz pełną obróbkę CNC, w tym frezowanie elektrod EDM według dokumentacji klienta. Dysponujemy nowoczesnym parkiem maszynowym przystosowanym do obróbki grafitu. Realizujemy zarówno pojedyncze sztuki, jak i serie produkcyjne. <a href="/kontakt/" class="text-accent hover:underline">Skontaktuj się z nami</a>, aby omówić szczegóły zamówienia.
+          </div>
+        </details>
+
+        <details class="group border border-steel-200 bg-white" data-animate="fade-up">
+          <summary class="flex cursor-pointer items-center justify-between px-6 py-4 font-heading font-bold text-steel-900 hover:text-accent transition-colors">
+            Jak szybko realizujecie zamówienia na grafit EDM?
+            <svg class="h-5 w-5 shrink-0 text-steel-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4 text-steel-600 leading-relaxed">
+            Standardowe gatunki grafitu SGL Carbon (R8710, R8650, R8500, R8510) utrzymujemy na magazynie w Polsce, co pozwala na <strong>realizację zamówień w ciągu kilku dni roboczych</strong>. Dla niestandardowych wymiarów lub większych partii czas realizacji ustalamy indywidualnie. Dostarczamy na terenie całej Polski za pośrednictwem sprawdzonych firm kurierskich.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <ContactCTA />
+
+</BaseLayout>

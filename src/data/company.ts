@@ -1,0 +1,20 @@
+export const company = {
+  name: 'AK Technic',
+  fullName: 'AK Technic Anna Krysztofińska',
+  tagline: 'Oficjalny dystrybutor grafitu SGL Carbon na Polskę',
+  description: 'Od 2012 roku dostarczamy profesjonalne rozwiązania dla przemysłu narzędziowego. Grafit EDM, oprawki EROWA, materiały eksploatacyjne oraz usługi obróbki CNC.',
+  founded: 2012,
+  address: {
+    street: 'ul. Fordońska 246',
+    city: 'Bydgoszcz',
+    postalCode: '85-766',
+    country: 'Polska',
+  },
+  phone: '+48 602 363 189',
+  email: 'biuro@ak-technic.pl',
+  website: 'https://ak-technic.pl',
+  hours: 'Pon-Pt: 8:00 - 16:00',
+  logo: '/images/logo/logo-aktechnic.png',
+  logoAlt: 'AK Technic - Logo',
+  ogImage: '/images/og-default.jpg',
+} as const;
